@@ -9,17 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/medicines")
+@WebServlet("/medicine")
 public class MedicineServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Medicine> medicines = MedicineService.getInstance().findAllMedicines();
-        req.setAttribute("medicines", medicines);
+        Medicine medicine = MedicineService.getInstance().getMedicineById();
+        req.setAttribute("medicine", medicine);
         getServletContext()
-                .getRequestDispatcher("/WEB-INF/jsp/medicines.jsp")
+                .getRequestDispatcher("/WEB-INF/jsp/medicine.jsp")
                 .forward(req, resp);
     }
 }
