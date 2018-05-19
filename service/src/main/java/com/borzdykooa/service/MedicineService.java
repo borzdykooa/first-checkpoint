@@ -1,19 +1,17 @@
-package by.borzdykooa.service;
+package com.borzdykooa.service;
 
-import by.borzdykooa.dao.MedicineDao;
-import by.borzdykooa.entity.Medicine;
+import com.borzdykooa.dao.MedicineDao;
+import com.borzdykooa.entity.Medicine;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MedicineService {
 
     private static final MedicineService INSTANCE = new MedicineService();
 
-    public List<Medicine> findAllMedicines() {
-        return MedicineDao.getInstance().getAllMedicines();
+    public Medicine getMedicineById(Long id) {
+        return MedicineDao.getInstance().findMedicineById(id);
     }
 
     public static MedicineService getInstance() {
