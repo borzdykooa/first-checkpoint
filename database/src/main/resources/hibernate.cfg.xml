@@ -14,14 +14,15 @@
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
-        <mapping class="by.borzdykooa.entity.User"/>
-        <mapping class="by.borzdykooa.entity.Admin"/>
-        <mapping class="by.borzdykooa.entity.Client"/>
-        <mapping class="by.borzdykooa.entity.Prescription"/>
-        <mapping class="by.borzdykooa.entity.Review"/>
-        <mapping class="by.borzdykooa.entity.Medicine"/>
-        <mapping class="by.borzdykooa.entity.Ordering"/>
-        <mapping class="by.borzdykooa.entity.OrderingMedicine"/>
-        <mapping class="by.borzdykooa.entity.PharmacyGroup"/>
+        <mapping class="com.borzdykooa.entity.User"/>
+        <mapping class="com.borzdykooa.entity.Admin"/>
+        <mapping class="com.borzdykooa.entity.Client"/>
+        <mapping class="com.borzdykooa.entity.Prescription"/>
+        <mapping class="com.borzdykooa.entity.Review"/>
+        <mapping class="com.borzdykooa.entity.Medicine"/>
+        <mapping class="com.borzdykooa.entity.Ordering"/>
+        <mapping class="com.borzdykooa.entity.OrderingMedicine"/>
+        <mapping class="com.borzdykooa.entity.PharmacyGroup"/>
+        <mapping class="com.borzdykooa.entity.SaleInfo"/>
     </session-factory>
 </hibernate-configuration>

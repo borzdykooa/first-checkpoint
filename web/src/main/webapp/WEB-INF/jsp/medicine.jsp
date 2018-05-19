@@ -9,8 +9,8 @@
 <h3>${requestScope.medicine.name}</h3>
 
 <p>Описание препарата: ${requestScope.medicine.description}</p>
-<p>Цена препарата: ${requestScope.medicine.price} бел.руб.</p>
-<p>Количество упаковок в наличии: ${requestScope.medicine.quantity}</p>
+<p>Цена препарата: ${requestScope.medicine.saleInfo.price} бел.руб.</p>
+<p>Количество упаковок в наличии: ${requestScope.medicine.saleInfo.quantity}</p>
 <p>Лекарственная группа: ${requestScope.medicine.pharmacyGroup.name}</p>
 
 </body>
