@@ -1,5 +1,6 @@
 package com.borzdykooa.dao;
 
+import com.borzdykooa.dao.interfaces.DaoIF;
 import com.borzdykooa.entity.helpers.IdEntity;
 import com.borzdykooa.manager.SessionFactoryManager;
 import org.hibernate.Session;
@@ -12,7 +13,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public class BaseDao<PK extends Serializable, T extends IdEntity<PK>> implements Dao<PK, T> {
+public class BaseDao<PK extends Serializable, T extends IdEntity<PK>> implements DaoIF<PK, T> {
 
     protected static final SessionFactory SESSION_FACTORY = SessionFactoryManager.getSessionFactory();
 
@@ -46,11 +47,10 @@ public class BaseDao<PK extends Serializable, T extends IdEntity<PK>> implements
     @Override
     public List<T> findAll() {
         try (Session session = SESSION_FACTORY.openSession()) {
-//            return session.createQuery(String.format("select o from %s o", clazz.getSimpleName()), clazz).list();
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<T> criteria = cb.createQuery(clazz);
             Root<T> root = criteria.from(clazz);
-
+            criteria.select(root);
             return session.createQuery(criteria).list();
         }
     }

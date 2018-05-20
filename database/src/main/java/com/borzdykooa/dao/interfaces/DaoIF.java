@@ -1,11 +1,11 @@
-package com.borzdykooa.dao;
+package com.borzdykooa.dao.interfaces;
 
 import com.borzdykooa.entity.helpers.IdEntity;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface Dao<PK extends Serializable, T extends IdEntity<PK>> {
+public interface DaoIF<PK extends Serializable, T extends IdEntity<PK>> {
 
     PK save(T object);
 

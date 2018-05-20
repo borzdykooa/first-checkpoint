@@ -32,4 +32,5 @@ public class PharmacyGroup extends IdEntity <Long>{
     public PharmacyGroup(String name) {
         this.name = name;
     }
+
 }
