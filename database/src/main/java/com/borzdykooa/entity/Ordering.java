@@ -28,7 +28,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "ordering", schema = "online_pharmacy")
-public class Ordering extends IdEntity <Long>{
+public class Ordering extends IdEntity<Long> {
 
     @Column(name = "date_of_ordering", nullable = false)
     private LocalDate dateOfOrdering;

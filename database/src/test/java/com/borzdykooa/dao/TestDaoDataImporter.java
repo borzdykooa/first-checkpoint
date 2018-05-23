@@ -42,6 +42,8 @@ public final class TestDaoDataImporter {
             session.save(prostoferon);
 
             PharmacyGroup newGroup = new PharmacyGroup("новая группа");
+            SaleInfo saleInfoNovoferon = new SaleInfo(BigDecimal.valueOf(5.55), 11L, true);
+            session.save(saleInfoNovoferon);
             session.save(newGroup);
 
             Client client = new Client("ivan", "pass", UserRole.CLIENT, new FullName("Ivanov", "Ivan", "Ivanovich"), LocalDate.of(2000, 3, 6), "123456", "Minsk Mira 3/5");

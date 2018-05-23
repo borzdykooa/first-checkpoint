@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Setter
 @ToString
 @MappedSuperclass
-public class IdEntity <PK extends Serializable> {
+public class IdEntity<PK extends Serializable> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,11 +14,11 @@ public class MedicineDao extends BaseDao<Long, Medicine> implements MedicineDaoI
     @Override
     public List<Medicine> findComplex(int limit, int page, String partName, String partDescription, Boolean needPrescription, Long groupId) {
         try (Session session = SESSION_FACTORY.openSession()) {
-            return session.createQuery("select m from Medicine m join m.saleInfo si join m.pharmacyGroup g where " +
-                    "lower(m.name) like :partName and " +
-                    "lower(m.description) like :partDescription and " +
-                    "g.id=:groupId and " +
-                    "si.needPrescription=:needPrescription", Medicine.class)
+            return session.createQuery("select m from Medicine m join m.saleInfo si join m.pharmacyGroup g where "
+                    + "lower(m.name) like :partName and "
+                    + "lower(m.description) like :partDescription and "
+                    + "g.id=:groupId and "
+                    + "si.needPrescription=:needPrescription", Medicine.class)
                     .setParameter("partName", "%" + partName.toLowerCase() + "%")
                     .setParameter("partDescription", "%" + partDescription.toLowerCase() + "%")
                     .setParameter("needPrescription", needPrescription)
@@ -47,31 +47,6 @@ public class MedicineDao extends BaseDao<Long, Medicine> implements MedicineDaoI
                     .setParameter("groupId", groupId)
                     .list();
         }
-    }
-
-    @Override
-    public Long save(Medicine medicine) {
-        return super.save(medicine);
-    }
-
-    @Override
-    public Medicine find(Long id) {
-        return super.find(id);
-    }
-
-    @Override
-    public List<Medicine> findAll() {
-        return super.findAll();
-    }
-
-    @Override
-    public void update(Medicine medicine) {
-        super.update(medicine);
-    }
-
-    @Override
-    public void delete(Medicine medicine) {
-        super.delete(medicine);
     }
 
     public static MedicineDaoIF getInstance() {

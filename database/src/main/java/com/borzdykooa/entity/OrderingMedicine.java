@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "ordering_medicine", schema = "online_pharmacy")
-public class OrderingMedicine extends IdEntity <Long>{
+public class OrderingMedicine extends IdEntity<Long> {
 
     @ManyToOne
     @JoinColumn(name = "ordering_id", nullable = false)

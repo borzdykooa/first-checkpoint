@@ -29,13 +29,13 @@ public class MedicineDaoTest {
     private SessionFactory sessionFactory;
 
     @Before
-    public void before() {
+    public void initDb() {
         sessionFactory = new Configuration().configure().buildSessionFactory();
         TestDaoDataImporter.getInstance().importTestData(sessionFactory);
     }
 
     @After
-    public void after() {
+    public void finish() {
         sessionFactory.close();
     }
 
@@ -46,13 +46,18 @@ public class MedicineDaoTest {
             List<Medicine> allMedicines = medicineDao.findAll();
             List<String> names = allMedicines.stream().map(Medicine::getName).collect(toList());
             assertThat(names, Matchers.hasItem("котоферон"));
+            session.getTransaction().commit();
         }
     }
 
     @Test
     public void testFind() {
-        Medicine medicine = medicineDao.find(1L);
-        assertNotNull("Entity is null!", medicine);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Medicine medicine = medicineDao.find(1L);
+            assertNotNull("Entity is null!", medicine);
+            session.getTransaction().commit();
+        }
     }
 
     @Test
@@ -60,12 +65,13 @@ public class MedicineDaoTest {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             PharmacyGroup newGroup = session.find(PharmacyGroup.class, 3L);
-            SaleInfo saleInfoNovoferon = session.find(SaleInfo.class, 1L);
+            SaleInfo saleInfoNovoferon = session.find(SaleInfo.class, 3L);
             Medicine novoferon = new Medicine("новоферон", "новое лекарство", newGroup, saleInfoNovoferon);
             medicineDao.save(novoferon);
             session.getTransaction().commit();
-            session.evict(novoferon);
-            assertNotNull("Entity is not saved", novoferon.getId());
+            session.clear();
+            Medicine savedMedicine = session.find(Medicine.class, 3L);
+            assertNotNull("Entity is not saved", savedMedicine);
         }
     }
 
@@ -123,7 +129,7 @@ public class MedicineDaoTest {
     }
 
     @Test
-    public void testFindGroupId() {
+    public void testFindByGroupId() {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             List<Medicine> allMedicines = medicineDao.findByGroupId(1L);

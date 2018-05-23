@@ -1,6 +1,5 @@
 package com.borzdykooa.entity;
 
-import com.borzdykooa.entity.enums.AdminRole;
 import com.borzdykooa.entity.enums.UserRole;
 import com.borzdykooa.entity.helpers.IdEntity;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,7 @@ import java.util.Set;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user", schema = "online_pharmacy")
-public abstract class User extends IdEntity <Long>{
+public abstract class User extends IdEntity<Long> {
 
     @Column(name = "login", unique = true, nullable = false)
     private String login;

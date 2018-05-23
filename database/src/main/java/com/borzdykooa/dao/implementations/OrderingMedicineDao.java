@@ -31,31 +31,6 @@ public class OrderingMedicineDao extends BaseDao<Long, OrderingMedicine> impleme
         }
     }
 
-    @Override
-    public Long save(OrderingMedicine orderingMedicine) {
-        return super.save(orderingMedicine);
-    }
-
-    @Override
-    public OrderingMedicine find(Long id) {
-        return super.find(id);
-    }
-
-    @Override
-    public List<OrderingMedicine> findAll() {
-        return super.findAll();
-    }
-
-    @Override
-    public void update(OrderingMedicine orderingMedicine) {
-        super.update(orderingMedicine);
-    }
-
-    @Override
-    public void delete(OrderingMedicine orderingMedicine) {
-        super.delete(orderingMedicine);
-    }
-
     public static OrderingMedicineDaoIF getInstance() {
         return INSTANCE;
     }
