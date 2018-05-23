@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "review", schema = "online_pharmacy")
-public class Review extends IdEntity <Long>{
+public class Review extends IdEntity<Long> {
 
     @Column(name = "mark", nullable = false)
     private Integer mark;

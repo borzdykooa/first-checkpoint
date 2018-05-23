@@ -9,9 +9,9 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -32,7 +32,11 @@ public class SaleInfo extends IdEntity<Long> {
     @Column(name = "need_prescription", nullable = false)
     private Boolean needPrescription;
 
-    @OneToOne (mappedBy = "saleInfo")
+    @Version
+    @Column(name = "version")
+    private Long version;
+
+    @OneToOne(mappedBy = "saleInfo")
     private Medicine medicine;
 
     public SaleInfo(BigDecimal price, Long quantity, Boolean needPrescription) {

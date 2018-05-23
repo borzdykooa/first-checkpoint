@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "pharmacy_group", schema = "online_pharmacy")
-public class PharmacyGroup extends IdEntity <Long>{
+public class PharmacyGroup extends IdEntity<Long> {
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
@@ -32,4 +32,5 @@ public class PharmacyGroup extends IdEntity <Long>{
     public PharmacyGroup(String name) {
         this.name = name;
     }
+
 }

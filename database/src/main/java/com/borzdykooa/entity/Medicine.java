@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "medicine", schema = "online_pharmacy")
-public class Medicine extends IdEntity <Long>{
+public class Medicine extends IdEntity<Long> {
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
