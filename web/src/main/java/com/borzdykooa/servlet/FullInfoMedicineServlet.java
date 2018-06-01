@@ -2,6 +2,7 @@ package com.borzdykooa.servlet;
 
 import com.borzdykooa.entity.Medicine;
 import com.borzdykooa.service.MedicineService;
+import com.borzdykooa.util.UtilClass;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ public class FullInfoMedicineServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         if (id != null) {
-            Medicine fullMedicineInfo = MedicineService.getInstance().find(Long.valueOf(id));
+            Medicine fullMedicineInfo = UtilClass.getBean(MedicineService.class).find(Long.valueOf(id));
             req.setAttribute("medicine", fullMedicineInfo);
             getServletContext()
                     .getRequestDispatcher("/WEB-INF/jsp/medicine-full-info.jsp")

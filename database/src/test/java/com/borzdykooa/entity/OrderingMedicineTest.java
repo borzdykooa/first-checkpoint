@@ -1,13 +1,21 @@
 package com.borzdykooa.entity;
 
+import com.borzdykooa.config.TestDaoConfiguration;
 import com.borzdykooa.entity.enums.Status;
 import com.borzdykooa.entity.enums.UserRole;
 import com.borzdykooa.entity.helpers.FullName;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = TestDaoConfiguration.class)
+@Transactional
 public class OrderingMedicineTest extends BaseEntityTest {
 
     @Test
@@ -26,9 +34,9 @@ public class OrderingMedicineTest extends BaseEntityTest {
         Client client = new Client("ivan2", "pass", UserRole.CLIENT,new FullName("Ivanov", "Ivan", "Ivanovich"), LocalDate.of(2000, 3, 6), "123456", "Minsk Mira 3/5");
         Ordering firstOrder = new Ordering(LocalDate.of(2018, 3, 5), LocalDate.of(2018, 3, 5), Status.DONE, BigDecimal.valueOf(36), client);
         PharmacyGroup antihistamines = new PharmacyGroup("антигистаминные препараты");
-        SaleInfo saleInfoprostoferon=new SaleInfo(BigDecimal.valueOf(5.55), 11L, true);
-        Medicine prostoferon = new Medicine("простоферон", "просто лекарство",  antihistamines,saleInfoprostoferon);
-        OrderingMedicine orderingMedicine = new OrderingMedicine(firstOrder, prostoferon, 15L);
-        find(client, firstOrder, antihistamines, saleInfoprostoferon,prostoferon, orderingMedicine);
+        SaleInfo saleInfoEron=new SaleInfo(BigDecimal.valueOf(5.55), 12L, true);
+        Medicine eron = new Medicine("ерон", "просто лекарство",  antihistamines,saleInfoEron);
+        OrderingMedicine orderingMedicine = new OrderingMedicine(firstOrder, eron, 15L);
+        find(client, firstOrder, antihistamines, saleInfoEron,eron, orderingMedicine);
     }
 }

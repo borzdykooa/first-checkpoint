@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "medicine")
+//@ToString(exclude = "saleInfoMedicine",callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "sale_info", schema = "online_pharmacy")
@@ -32,16 +32,21 @@ public class SaleInfo extends IdEntity<Long> {
     @Column(name = "need_prescription", nullable = false)
     private Boolean needPrescription;
 
-    @Version
-    @Column(name = "version")
-    private Long version;
-
     @OneToOne(mappedBy = "saleInfo")
-    private Medicine medicine;
+    private Medicine saleInfoMedicine;
 
     public SaleInfo(BigDecimal price, Long quantity, Boolean needPrescription) {
         this.price = price;
         this.quantity = quantity;
         this.needPrescription = needPrescription;
+    }
+
+    @Override
+    public String toString() {
+        return "SaleInfo{" +
+                "price=" + price +
+                ", quantity=" + quantity +
+                ", needPrescription=" + needPrescription +
+                '}';
     }
 }

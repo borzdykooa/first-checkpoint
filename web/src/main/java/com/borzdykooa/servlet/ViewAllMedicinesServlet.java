@@ -2,6 +2,7 @@ package com.borzdykooa.servlet;
 
 import com.borzdykooa.entity.Medicine;
 import com.borzdykooa.service.MedicineService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,12 @@ import java.util.List;
 @WebServlet("/medicines")
 public class ViewAllMedicinesServlet extends HttpServlet {
 
+    @Autowired
+    private MedicineService medicineService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Medicine> medicines = MedicineService.getInstance().getAllMedicines();
+        List<Medicine> medicines = medicineService.findAll();
         req.setAttribute("medicines", medicines);
         getServletContext()
                 .getRequestDispatcher("/WEB-INF/jsp/medicines-list.jsp")

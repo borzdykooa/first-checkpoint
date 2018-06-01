@@ -1,13 +1,21 @@
 package com.borzdykooa.entity;
 
+import com.borzdykooa.config.TestDaoConfiguration;
 import com.borzdykooa.entity.enums.UserRole;
 import com.borzdykooa.entity.helpers.FullName;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = TestDaoConfiguration.class)
+@Transactional
 public class ReviewTest extends BaseEntityTest {
 
     @Test

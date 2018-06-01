@@ -3,32 +3,22 @@ package com.borzdykooa.entity;
 import com.borzdykooa.entity.helpers.IdEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.assertNotNull;
 
+//@Component
 public class BaseEntityTest {
 
-    protected static SessionFactory FACTORY;
-
-    @BeforeClass
-    public static void before() {
-        FACTORY = new Configuration().configure().buildSessionFactory();
-    }
-
-    @AfterClass
-    public static void after() {
-        FACTORY.close();
-    }
+    @Autowired
+    SessionFactory sessionFactory;
 
     @Before
     public void clean() {
-        try (Session session = FACTORY.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.createQuery("delete from OrderingMedicine ").executeUpdate();
             session.createQuery("delete from Prescription ").executeUpdate();
@@ -45,8 +35,7 @@ public class BaseEntityTest {
     }
 
     public <T extends IdEntity> void save(T... object) {
-        try (Session session = FACTORY.openSession()) {
-
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Arrays.asList(object).forEach(it -> {
                 session.save(it);
@@ -58,16 +47,14 @@ public class BaseEntityTest {
     }
 
     public <T extends IdEntity> void find(T... object) {
-        try (Session session = FACTORY.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-
             Arrays.asList(object).forEach(it -> {
                 session.save(it);
                 session.clear();
                 IdEntity idEntity = session.find(it.getClass(), it.getId());
                 assertNotNull("Entity is null", idEntity);
             });
-
             session.getTransaction().commit();
         }
     }

@@ -1,35 +1,54 @@
 package com.borzdykooa.service;
 
-import com.borzdykooa.dao.implementations.MedicineDao;
+import com.borzdykooa.dao.daoInterface.MedicineDao;
 import com.borzdykooa.entity.Medicine;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Service
+@Transactional
 public class MedicineService {
 
-    private static final MedicineService INSTANCE = new MedicineService();
+//    @Autowired
+    private final MedicineDao medicineDao;
 
-    public Medicine find(Long id) {
-        return MedicineDao.getInstance().find(id);
+    @Autowired
+    public MedicineService(MedicineDao medicineDao) {
+        this.medicineDao = medicineDao;
     }
 
-
-    public Medicine getMedicineById(Long id) {
-        return MedicineDao.getInstance().find(id);
+    public List<Medicine> findComplex(int limit, int page, String partName, String partDescription, Boolean needPrescription) {
+        return medicineDao.findComplex(limit, page, partName, partDescription, needPrescription);
     }
 
-    public List<Medicine> getComplex(int limit, int page, String partName, String partDescription, Boolean needPrescription, Long groupId) {
-        return MedicineDao.getInstance().findComplex(limit, page, partName, partDescription, needPrescription, groupId);
+    public List<Medicine> findAll() {
+        return medicineDao.findAll();
     }
 
-    public List<Medicine> getAllMedicines() {
-        return MedicineDao.getInstance().findAll();
+    public Medicine find(Long id){
+        return medicineDao.find(id);
     }
 
-    public static MedicineService getInstance() {
-        return INSTANCE;
+    public List<Medicine> findByPartName(String partName) {
+        return medicineDao.findByPartName(partName);
+    }
+
+    public List<Medicine> findByGroupId(Long groupId) {
+        return medicineDao.findByGroupId(groupId);
+    }
+
+    public Long save(Medicine medicine){
+        return medicineDao.save(medicine);
+    }
+
+    public void delete(Medicine medicine){
+        medicineDao.delete(medicine);
+    }
+
+    public void update(Medicine medicine){
+        medicineDao.update(medicine);
     }
 }

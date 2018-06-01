@@ -1,7 +1,5 @@
 package com.borzdykooa.servlet;
 
-import com.borzdykooa.service.PharmacyGroupService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +12,7 @@ public class FirstPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("groups", PharmacyGroupService.getInstance().getAllGroups());
+//        req.setAttribute("groups", pharmacyGroupService.findAll());
         getServletContext()
                 .getRequestDispatcher("/WEB-INF/jsp/first-page.jsp")
                 .forward(req, resp);
