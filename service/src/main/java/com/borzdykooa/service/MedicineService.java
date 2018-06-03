@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 public class MedicineService {
 
-//    @Autowired
     private final MedicineDao medicineDao;
 
     @Autowired
@@ -24,14 +23,6 @@ public class MedicineService {
         return medicineDao.findComplex(limit, page, partName, partDescription, needPrescription);
     }
 
-    public List<Medicine> findAll() {
-        return medicineDao.findAll();
-    }
-
-    public Medicine find(Long id){
-        return medicineDao.find(id);
-    }
-
     public List<Medicine> findByPartName(String partName) {
         return medicineDao.findByPartName(partName);
     }
@@ -40,15 +31,23 @@ public class MedicineService {
         return medicineDao.findByGroupId(groupId);
     }
 
-    public Long save(Medicine medicine){
+    public Medicine find(Long id) {
+        return medicineDao.find(id);
+    }
+
+    public List<Medicine> findAll() {
+        return medicineDao.findAll();
+    }
+
+    public Long save(Medicine medicine) {
         return medicineDao.save(medicine);
     }
 
-    public void delete(Medicine medicine){
+    public void delete(Medicine medicine) {
         medicineDao.delete(medicine);
     }
 
-    public void update(Medicine medicine){
+    public void update(Medicine medicine) {
         medicineDao.update(medicine);
     }
 }

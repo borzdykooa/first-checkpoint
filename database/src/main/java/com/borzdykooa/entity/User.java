@@ -22,7 +22,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"orders", "prescriptions", "reviews"},callSuper = true)
+@ToString(exclude = {"orders", "prescriptions", "reviews"}, callSuper = true)
 @NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

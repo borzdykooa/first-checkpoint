@@ -17,7 +17,6 @@
 
     Сколько лекарств отображать на странице? <input type="text" name="limit" value="${requestScope.limit}"><br>
 
-
     <input type="hidden" name="page" value="1"/><br>
 
     <input type="submit" value="Найти">

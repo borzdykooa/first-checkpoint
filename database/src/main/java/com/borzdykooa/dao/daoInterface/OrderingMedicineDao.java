@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderingMedicineDao extends Dao<Long, OrderingMedicine> {
 
-    List<OrderingMedicine> getOrderingByUserId(Long userId);
+    List<OrderingMedicine> findOrderingByUserId(Long userId);
 
-    List<OrderingMedicine> getOrderingByMedicineId(Long medicineId);
+    List<OrderingMedicine> findOrderingByMedicineId(Long medicineId);
 }

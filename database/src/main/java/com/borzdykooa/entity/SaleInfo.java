@@ -11,13 +11,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Getter
 @Setter
-//@ToString(exclude = "saleInfoMedicine",callSuper = true)
+@ToString(exclude = "saleInfoMedicine", callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "sale_info", schema = "online_pharmacy")
@@ -39,14 +38,5 @@ public class SaleInfo extends IdEntity<Long> {
         this.price = price;
         this.quantity = quantity;
         this.needPrescription = needPrescription;
-    }
-
-    @Override
-    public String toString() {
-        return "SaleInfo{" +
-                "price=" + price +
-                ", quantity=" + quantity +
-                ", needPrescription=" + needPrescription +
-                '}';
     }
 }

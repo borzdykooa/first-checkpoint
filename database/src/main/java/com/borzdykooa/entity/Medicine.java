@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-//@ToString(exclude = {"orderingMedicines" ,"prescriptions","reviews"},callSuper = true)
+@ToString(exclude = {"orderingMedicines", "prescriptions", "reviews"}, callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "medicine", schema = "online_pharmacy")
@@ -38,7 +37,7 @@ public class Medicine extends IdEntity<Long> {
     private PharmacyGroup pharmacyGroup;
 
     @OneToOne
-    @JoinColumn(name = "sale_info_id",unique = true)
+    @JoinColumn(name = "sale_info_id", unique = true)
     private SaleInfo saleInfo;
 
     @OneToMany(mappedBy = "medicine")
@@ -55,15 +54,5 @@ public class Medicine extends IdEntity<Long> {
         this.description = description;
         this.pharmacyGroup = pharmacyGroup;
         this.saleInfo = saleInfo;
-    }
-
-    @Override
-    public String toString() {
-        return "Medicine{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", pharmacyGroup=" + pharmacyGroup +
-                ", saleInfo=" + saleInfo +
-                '}';
     }
 }

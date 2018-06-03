@@ -12,7 +12,6 @@ public class FirstPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setAttribute("groups", pharmacyGroupService.findAll());
         getServletContext()
                 .getRequestDispatcher("/WEB-INF/jsp/first-page.jsp")
                 .forward(req, resp);

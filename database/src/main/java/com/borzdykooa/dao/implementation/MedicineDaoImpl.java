@@ -2,12 +2,17 @@ package com.borzdykooa.dao.implementation;
 
 import com.borzdykooa.dao.daoInterface.MedicineDao;
 import com.borzdykooa.entity.Medicine;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class MedicineDaoImpl extends BaseDaoImpl<Long, Medicine> implements MedicineDao {
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public List<Medicine> findComplex(int limit, int page, String partName, String partDescription, Boolean needPrescription) {

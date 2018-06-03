@@ -21,16 +21,16 @@
     </div>
 </div>
 
-    <div class="pagination">
-        <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=${sessionScope.page-1}"
-           class="prev">предыдущая</a>
-        <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=1">1</a>
-        <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=2">2</a>
-        <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=3">3</a>
-        <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=4">4</a>
-        <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=${sessionScope.page+1}"
-           class="next">следующая</a>
-    </div>
+<div class="pagination">
+    <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=${sessionScope.page-1}"
+       class="prev">предыдущая</a>
+    <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=1">1</a>
+    <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=2">2</a>
+    <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=3">3</a>
+    <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=4">4</a>
+    <a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=${sessionScope.page+1}"
+       class="next">следующая</a>
+</div>
 
 </body>
 </html>

@@ -17,10 +17,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "com.borzdykooa.dao")
+@ComponentScan(basePackages = "com.borzdykooa")
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-public class PersistenceDaoConfiguration {
+public class DaoConfiguration {
 
     @Value("classpath:database.properties")
     private Resource databaseResource;
@@ -67,17 +67,3 @@ public class PersistenceDaoConfiguration {
         return transactionManager;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

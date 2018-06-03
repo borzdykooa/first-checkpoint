@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 public class PharmacyGroupService {
 
-//    @Autowired
     private final PharmacyGroupDao pharmacyGroupDao;
 
     @Autowired
@@ -20,11 +19,23 @@ public class PharmacyGroupService {
         this.pharmacyGroupDao = pharmacyGroupDao;
     }
 
+    public PharmacyGroup find(Long id) {
+        return pharmacyGroupDao.find(id);
+    }
+
     public List<PharmacyGroup> findAll() {
         return pharmacyGroupDao.findAll();
     }
 
-    public void delete(PharmacyGroup pharmacyGroup){
+    public Long save(PharmacyGroup pharmacyGroup) {
+        return pharmacyGroupDao.save(pharmacyGroup);
+    }
+
+    public void delete(PharmacyGroup pharmacyGroup) {
         pharmacyGroupDao.delete(pharmacyGroup);
+    }
+
+    public void update(PharmacyGroup pharmacyGroup) {
+        pharmacyGroupDao.update(pharmacyGroup);
     }
 }

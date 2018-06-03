@@ -12,7 +12,7 @@ import java.util.List;
 public class BaseDaoImpl<PK extends Serializable, T extends IdEntity<PK>> implements Dao<PK, T> {
 
     @Autowired
-    protected SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     private Class<T> clazz;
 
     @SuppressWarnings("unchecked")

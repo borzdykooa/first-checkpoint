@@ -1,13 +1,13 @@
 package com.borzdykooa.util;
 
-import com.borzdykooa.config.PersistenceDaoConfiguration;
+import com.borzdykooa.config.DaoConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class UtilClass {
+public final class UtilClass {
 
-    private static AnnotationConfigApplicationContext CONTEXT = new AnnotationConfigApplicationContext(PersistenceDaoConfiguration.class);
+    private static final AnnotationConfigApplicationContext CONTEXT = new AnnotationConfigApplicationContext(DaoConfiguration.class);
 
-    public static <T> T getBean (Class<T> clazz) {
+    public static <T> T getBean(Class<T> clazz) {
         return CONTEXT.getBean(clazz);
     }
 }
