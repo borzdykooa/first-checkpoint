@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
 <h3>${requestScope.medicine.name}</h3>
 
 <p>Описание препарата: ${requestScope.medicine.description}</p>
@@ -17,14 +16,12 @@
 <p>Необходимость рецепта: ${requestScope.medicine.saleInfo.needPrescription}</p>
 <p>Лекарственная группа: ${requestScope.medicine.pharmacyGroup.name}</p>
 
-
 <%--<form action="${pageContext.request.contextPath}/addToBasket" method="get">--%>
 
 <%--<input type="hidden" name="medicineId" value="${requestScope.medicine.id}"/><br>--%>
 <%--<input type="hidden" name="medicineName" value="${requestScope.medicine.name}"/><br>--%>
 <%--<input type="hidden" name="medicinePrice" value="${requestScope.medicine.price}"/><br>--%>
 <%--<input type="hidden" name="medicineQuantity" value="${requestScope.medicine.quantity}"/><br>--%>
-
 
 <%--<c:if test="${not empty sessionScope.currentUser and sessionScope.currentUser.login != 'borzdykooa@mail.ru'}">--%>
 <%--Количество упаковок для заказа: <br>--%>

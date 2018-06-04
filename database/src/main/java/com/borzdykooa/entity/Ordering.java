@@ -24,7 +24,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "orderingMedicines")
+@ToString(exclude = "orderingMedicines", callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "ordering", schema = "online_pharmacy")

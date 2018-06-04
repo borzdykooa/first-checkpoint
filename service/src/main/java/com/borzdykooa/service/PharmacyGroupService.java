@@ -1,19 +1,41 @@
 package com.borzdykooa.service;
 
-import com.borzdykooa.dao.implementations.PharmacyGroupDao;
+import com.borzdykooa.dao.repository.PharmacyGroupDao;
 import com.borzdykooa.entity.PharmacyGroup;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class PharmacyGroupService {
 
-    private static final PharmacyGroupService INSTANCE = new PharmacyGroupService();
+    private final PharmacyGroupDao pharmacyGroupDao;
 
-    public List<PharmacyGroup> getAllGroups() {
-        return PharmacyGroupDao.getInstance().findAll();
+    @Autowired
+    public PharmacyGroupService(PharmacyGroupDao pharmacyGroupDao) {
+        this.pharmacyGroupDao = pharmacyGroupDao;
     }
 
-    public static PharmacyGroupService getInstance() {
-        return INSTANCE;
+    public PharmacyGroup find(Long id) {
+        return pharmacyGroupDao.find(id);
+    }
+
+    public List<PharmacyGroup> findAll() {
+        return pharmacyGroupDao.findAll();
+    }
+
+    public Long save(PharmacyGroup pharmacyGroup) {
+        return pharmacyGroupDao.save(pharmacyGroup);
+    }
+
+    public void delete(PharmacyGroup pharmacyGroup) {
+        pharmacyGroupDao.delete(pharmacyGroup);
+    }
+
+    public void update(PharmacyGroup pharmacyGroup) {
+        pharmacyGroupDao.update(pharmacyGroup);
     }
 }

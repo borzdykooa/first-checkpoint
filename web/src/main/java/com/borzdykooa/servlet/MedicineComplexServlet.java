@@ -2,6 +2,7 @@ package com.borzdykooa.servlet;
 
 import com.borzdykooa.entity.Medicine;
 import com.borzdykooa.service.MedicineService;
+import com.borzdykooa.util.UtilClass;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,15 +22,13 @@ public class MedicineComplexServlet extends HttpServlet {
         String partName = req.getParameter("partName");
         String partDescription = req.getParameter("partDescription");
         String needPrescription = req.getParameter("needPrescription");
-        String groupId = req.getParameter("groupId");
 
-        List<Medicine> medicines = MedicineService.getInstance().getComplex(Integer.valueOf(limit), Integer.valueOf(page), partName, partDescription, Boolean.valueOf(needPrescription), Long.valueOf(groupId));
+        List<Medicine> medicines = UtilClass.getBean(MedicineService.class).findComplex(Integer.valueOf(limit), Integer.valueOf(page), partName, partDescription, Boolean.valueOf(needPrescription));
         req.setAttribute("medicines", medicines);
         req.getSession().setAttribute("limit", limit);
         req.getSession().setAttribute("partName", partName);
         req.getSession().setAttribute("partDescription", partDescription);
         req.getSession().setAttribute("needPrescription", needPrescription);
-        req.getSession().setAttribute("groupId", groupId);
         req.getSession().setAttribute("page", page);
 
         getServletContext()

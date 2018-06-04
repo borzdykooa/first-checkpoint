@@ -2,6 +2,7 @@ package com.borzdykooa.servlet;
 
 import com.borzdykooa.entity.Medicine;
 import com.borzdykooa.service.MedicineService;
+import com.borzdykooa.util.UtilClass;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ public class ViewAllMedicinesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Medicine> medicines = MedicineService.getInstance().getAllMedicines();
+        List<Medicine> medicines = UtilClass.getBean(MedicineService.class).findAll();
         req.setAttribute("medicines", medicines);
         getServletContext()
                 .getRequestDispatcher("/WEB-INF/jsp/medicines-list.jsp")

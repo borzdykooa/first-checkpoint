@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Setter
 @Getter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "prescription", schema = "online_pharmacy")

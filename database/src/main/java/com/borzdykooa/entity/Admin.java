@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Setter
 @Getter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "admin", schema = "online_pharmacy")

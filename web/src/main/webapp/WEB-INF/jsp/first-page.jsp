@@ -13,15 +13,10 @@
     Введите название лекарства <input type="text" name="partName" value="${requestScope.partName}"><br>
     Введите описание лекарства <input type="text" name="partDescription" value="${requestScope.partDescription}"><br>
     Необходимость рецепта <input type="radio" name="needPrescription" value="${true}"> Да
-    <input type="radio" name="needPrescription" value="${false}"> Нет <br>
-    Группа лекарств:<br>
-    <select name="groupId">
-        <c:forEach var="group" items="${requestScope.groups}">
-            <option value="${group.id}">${group.name}</option>
-        </c:forEach>
-    </select><br>
-    Сколько лекарств отображать на странице? <input type="text" name="limit" value="${requestScope.limit}"><br>
+    <input type="radio" checked name="needPrescription" value="${false}"> Нет <br>
 
+    Сколько лекарств отображать на странице?
+    <input type="number" name="limit" value="20" min="1"/> <br>
 
     <input type="hidden" name="page" value="1"/><br>
 

@@ -20,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"orderingMedicines", "prescriptions", "reviews"})
+@ToString(exclude = {"orderingMedicines", "prescriptions", "reviews"}, callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "medicine", schema = "online_pharmacy")
@@ -37,7 +37,7 @@ public class Medicine extends IdEntity<Long> {
     private PharmacyGroup pharmacyGroup;
 
     @OneToOne
-    @JoinColumn(name = "sale_info_id")
+    @JoinColumn(name = "sale_info_id", unique = true)
     private SaleInfo saleInfo;
 
     @OneToMany(mappedBy = "medicine")
