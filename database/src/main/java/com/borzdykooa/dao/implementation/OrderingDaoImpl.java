@@ -1,6 +1,6 @@
 package com.borzdykooa.dao.implementation;
 
-import com.borzdykooa.dao.daoInterface.OrderingDao;
+import com.borzdykooa.dao.repository.OrderingDao;
 import com.borzdykooa.entity.Ordering;
 import org.springframework.stereotype.Repository;
 

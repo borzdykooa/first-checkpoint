@@ -32,7 +32,7 @@ public class SaleInfoServiceTest {
     private SessionFactory sessionFactory;
 
     @Autowired
-    TestServiceDataImporter testServiceDataImporter;
+    private TestServiceDataImporter testServiceDataImporter;
 
     @Before
     public void initDb() {

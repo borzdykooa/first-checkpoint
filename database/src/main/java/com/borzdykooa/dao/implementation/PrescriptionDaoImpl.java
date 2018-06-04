@@ -1,6 +1,6 @@
 package com.borzdykooa.dao.implementation;
 
-import com.borzdykooa.dao.daoInterface.PrescriptionDao;
+import com.borzdykooa.dao.repository.PrescriptionDao;
 import com.borzdykooa.entity.Prescription;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.borzdykooa.dao.implementation;
 
-import com.borzdykooa.dao.daoInterface.OrderingMedicineDao;
+import com.borzdykooa.dao.repository.OrderingMedicineDao;
 import com.borzdykooa.entity.OrderingMedicine;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

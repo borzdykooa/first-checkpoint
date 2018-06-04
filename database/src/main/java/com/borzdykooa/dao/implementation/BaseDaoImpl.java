@@ -1,6 +1,6 @@
 package com.borzdykooa.dao.implementation;
 
-import com.borzdykooa.dao.daoInterface.Dao;
+import com.borzdykooa.dao.repository.Dao;
 import com.borzdykooa.entity.helpers.IdEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

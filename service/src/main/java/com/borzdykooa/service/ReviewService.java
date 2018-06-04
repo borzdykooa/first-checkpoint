@@ -1,6 +1,6 @@
 package com.borzdykooa.service;
 
-import com.borzdykooa.dao.daoInterface.ReviewDao;
+import com.borzdykooa.dao.repository.ReviewDao;
 import com.borzdykooa.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.borzdykooa.dao.implementation;
 
-import com.borzdykooa.dao.daoInterface.ClientDao;
+import com.borzdykooa.dao.repository.ClientDao;
 import com.borzdykooa.entity.Client;
 import org.springframework.stereotype.Repository;
 

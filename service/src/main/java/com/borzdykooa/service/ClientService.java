@@ -1,6 +1,6 @@
 package com.borzdykooa.service;
 
-import com.borzdykooa.dao.daoInterface.ClientDao;
+import com.borzdykooa.dao.repository.ClientDao;
 import com.borzdykooa.entity.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

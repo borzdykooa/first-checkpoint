@@ -1,6 +1,6 @@
 package com.borzdykooa.dao.implementation;
 
-import com.borzdykooa.dao.daoInterface.AdminDao;
+import com.borzdykooa.dao.repository.AdminDao;
 import com.borzdykooa.entity.Admin;
 import org.springframework.stereotype.Repository;
 

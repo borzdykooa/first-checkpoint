@@ -1,6 +1,6 @@
 package com.borzdykooa.service;
 
-import com.borzdykooa.dao.daoInterface.PharmacyGroupDao;
+import com.borzdykooa.dao.repository.PharmacyGroupDao;
 import com.borzdykooa.entity.PharmacyGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

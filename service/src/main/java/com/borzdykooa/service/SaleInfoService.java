@@ -1,6 +1,6 @@
 package com.borzdykooa.service;
 
-import com.borzdykooa.dao.daoInterface.SaleInfoDao;
+import com.borzdykooa.dao.repository.SaleInfoDao;
 import com.borzdykooa.entity.SaleInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

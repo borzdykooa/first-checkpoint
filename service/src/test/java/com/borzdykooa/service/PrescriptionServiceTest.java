@@ -35,7 +35,7 @@ public class PrescriptionServiceTest {
     private SessionFactory sessionFactory;
 
     @Autowired
-    TestServiceDataImporter testServiceDataImporter;
+    private TestServiceDataImporter testServiceDataImporter;
 
     @Before
     public void initDb() {

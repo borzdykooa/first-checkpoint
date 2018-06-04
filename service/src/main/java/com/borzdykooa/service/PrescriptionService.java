@@ -1,6 +1,6 @@
 package com.borzdykooa.service;
 
-import com.borzdykooa.dao.daoInterface.PrescriptionDao;
+import com.borzdykooa.dao.repository.PrescriptionDao;
 import com.borzdykooa.entity.Prescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
