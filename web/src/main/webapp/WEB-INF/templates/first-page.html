@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/medicineComplex}" method="get">
+    <label for="partName">Введите название лекарства:
+        <input type="text" name="partName" th:field="*{partName}" id="partName">
+    </label><br>
+    <label for="partDescription">Введите описание лекарства:
+        <input type="text" name="partDescription" th:field="*{partDescription}" id="partDescription">
+    </label><br>
+    <div>
+        Необходимость рецепта:
+        <input type="radio" name="needPrescription" checked th:field="*{needPrescription}"
+               value="false"><span>Нет</span>
+        <input type="radio" name="needPrescription" th:field="*{needPrescription}" value="true"><span>Да</span>
+
+    </div>
+
+    <div>
+        Сколько лекарств отображать на странице?
+        <input type="number" name="limit" th:field="*{limit}" value="20" min="1"/> <br>
+    </div>
+    <input type="hidden" name="page" th:field="*{page}" value="1"/><br>
+
+    <input type="submit" value="Найти">
+</form>
+</body>
+</html>

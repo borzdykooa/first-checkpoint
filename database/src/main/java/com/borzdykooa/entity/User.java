@@ -27,7 +27,7 @@ import java.util.Set;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "user", schema = "online_pharmacy")
-public abstract class User extends IdEntity<Long> {
+public class User extends IdEntity<Long> {
 
     @Column(name = "login", unique = true, nullable = false)
     private String login;

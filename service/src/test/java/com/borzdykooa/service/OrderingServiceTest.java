@@ -3,6 +3,7 @@ package com.borzdykooa.service;
 import com.borzdykooa.config.TestServiceConfiguration;
 import com.borzdykooa.entity.Client;
 import com.borzdykooa.entity.Ordering;
+import com.borzdykooa.entity.OrderingMedicine;
 import com.borzdykooa.entity.enums.Status;
 import com.borzdykooa.util.TestServiceDataImporter;
 import org.hamcrest.Matchers;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -76,24 +78,32 @@ public class OrderingServiceTest {
         assertNotNull("Entity is not saved", id);
     }
 
-//    @Test
-//    public void testDelete() {
-//        Ordering ordering = sessionFactory.getCurrentSession().createQuery("select o from Ordering o where o.totalSum=36", Ordering.class)
-//                .list()
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//        assertNotNull(ordering);
-//
-//        orderingService.delete(ordering);
-//
-//        Ordering theSameOrdering = sessionFactory.getCurrentSession().createQuery("select o from Ordering o where o.totalSum=36", Ordering.class)
-//                .list()
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//        assertNull("Entity is not null!", theSameOrdering);
-//    }
+    @Test
+    public void testDelete() {
+        OrderingMedicine orderingMedicine = sessionFactory.getCurrentSession().createQuery("select om from OrderingMedicine om where om.ordering.totalSum=36", OrderingMedicine.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(orderingMedicine);
+        sessionFactory.getCurrentSession().delete(orderingMedicine);
+
+        Ordering ordering = sessionFactory.getCurrentSession().createQuery("select o from Ordering o where o.totalSum=36", Ordering.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(ordering);
+
+        orderingService.delete(ordering);
+
+        Ordering theSameOrdering = sessionFactory.getCurrentSession().createQuery("select o from Ordering o where o.totalSum=36", Ordering.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNull("Entity is not null!", theSameOrdering);
+    }
 
     @Test
     public void testUpdate() {
