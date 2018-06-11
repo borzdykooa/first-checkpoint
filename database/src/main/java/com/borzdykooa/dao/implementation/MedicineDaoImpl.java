@@ -17,9 +17,9 @@ public class MedicineDaoImpl extends BaseDaoImpl<Long, Medicine> implements Medi
     @Override
     public List<Medicine> findComplex(int limit, int page, String partName, String partDescription, Boolean needPrescription) {
         return sessionFactory.getCurrentSession().createQuery("select m from Medicine m join m.saleInfo si join m.pharmacyGroup g where "
-                + "lower(m.name) like :partName and "
-                + "lower(m.description) like :partDescription and "
-                + "si.needPrescription=:needPrescription", Medicine.class)
+                + "(lower(m.name) like :partName or :partName is null) and "
+                + "(lower(m.description) like :partDescription or :partDescription is null) and "
+                + "(si.needPrescription=:needPrescription or :needPrescription is null) ", Medicine.class)
                 .setParameter("partName", "%" + partName.toLowerCase() + "%")
                 .setParameter("partDescription", "%" + partDescription.toLowerCase() + "%")
                 .setParameter("needPrescription", needPrescription)

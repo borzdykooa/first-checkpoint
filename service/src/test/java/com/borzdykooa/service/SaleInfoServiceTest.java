@@ -1,6 +1,10 @@
 package com.borzdykooa.service;
 
 import com.borzdykooa.config.TestServiceConfiguration;
+import com.borzdykooa.entity.Medicine;
+import com.borzdykooa.entity.OrderingMedicine;
+import com.borzdykooa.entity.Prescription;
+import com.borzdykooa.entity.Review;
 import com.borzdykooa.entity.SaleInfo;
 import com.borzdykooa.util.TestServiceDataImporter;
 import org.hamcrest.Matchers;
@@ -18,6 +22,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -67,24 +72,56 @@ public class SaleInfoServiceTest {
         assertNotNull("Entity is not saved", id);
     }
 
-//    @Test
-//    public void testDelete() {
-//        SaleInfo saleInfo = sessionFactory.getCurrentSession().createQuery("select s from SaleInfo s where s.quantity=10", SaleInfo.class)
-//                .list()
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//        assertNotNull(saleInfo);
-//
-//        saleInfoService.delete(saleInfo);
-//
-//        SaleInfo theSameSaleInfo = sessionFactory.getCurrentSession().createQuery("select s from SaleInfo s where s.quantity=10", SaleInfo.class)
-//                .list()
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//        assertNull("Entity is not null!", theSameSaleInfo);
-//    }
+    @Test
+    public void testDelete() {
+        Review review = sessionFactory.getCurrentSession().createQuery("select r from Review r where r.reviewMedicine.saleInfo.quantity=10", Review.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(review);
+        sessionFactory.getCurrentSession().delete(review);
+
+        OrderingMedicine orderingMedicine = sessionFactory.getCurrentSession().createQuery("select om from OrderingMedicine om where om.medicine.saleInfo.quantity=10", OrderingMedicine.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(orderingMedicine);
+        sessionFactory.getCurrentSession().delete(orderingMedicine);
+
+        Prescription prescription = sessionFactory.getCurrentSession().createQuery("select p from Prescription p where p.prescriptionMedicine.saleInfo.quantity=10", Prescription.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(prescription);
+        sessionFactory.getCurrentSession().delete(prescription);
+
+        Medicine medicine = sessionFactory.getCurrentSession().createQuery("select m from Medicine m where m.saleInfo.quantity=10", Medicine.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(medicine);
+        sessionFactory.getCurrentSession().delete(medicine);
+
+        SaleInfo saleInfo = sessionFactory.getCurrentSession().createQuery("select s from SaleInfo s where s.quantity=10", SaleInfo.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(saleInfo);
+
+        saleInfoService.delete(saleInfo);
+
+        SaleInfo theSameSaleInfo = sessionFactory.getCurrentSession().createQuery("select s from SaleInfo s where s.quantity=10", SaleInfo.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNull("Entity is not null!", theSameSaleInfo);
+    }
 
     @Test
     public void testUpdate() {

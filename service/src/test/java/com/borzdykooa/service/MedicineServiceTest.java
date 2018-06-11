@@ -2,7 +2,10 @@ package com.borzdykooa.service;
 
 import com.borzdykooa.config.TestServiceConfiguration;
 import com.borzdykooa.entity.Medicine;
+import com.borzdykooa.entity.OrderingMedicine;
 import com.borzdykooa.entity.PharmacyGroup;
+import com.borzdykooa.entity.Prescription;
+import com.borzdykooa.entity.Review;
 import com.borzdykooa.entity.SaleInfo;
 import com.borzdykooa.util.TestServiceDataImporter;
 import org.hamcrest.Matchers;
@@ -22,6 +25,7 @@ import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -101,24 +105,48 @@ public class MedicineServiceTest {
         assertNotNull("Entity is not saved", id);
     }
 
-//    @Test
-//    public void testDelete() {
-//        Medicine medicine = sessionFactory.getCurrentSession().createQuery("select m from Medicine m where m.name= 'простоферон' ", Medicine.class)
-//                .list()
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//        assertNotNull(medicine);
-//
-//        medicineService.delete(medicine);
-//
-//        Medicine theSameMedicine = sessionFactory.getCurrentSession().createQuery("select m from Medicine m where m.name= 'простоферон' ", Medicine.class)
-//                .list()
-//                .stream()
-//                .findFirst()
-//                .orElse(null);
-//        assertNull("Entity is not null!", theSameMedicine);
-//    }
+    @Test
+    public void testDelete() {
+        Review review = sessionFactory.getCurrentSession().createQuery("select r from Review r where r.reviewMedicine.name= 'простоферон'", Review.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(review);
+        sessionFactory.getCurrentSession().delete(review);
+
+        OrderingMedicine orderingMedicine = sessionFactory.getCurrentSession().createQuery("select om from OrderingMedicine om where om.medicine.name= 'простоферон'", OrderingMedicine.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(orderingMedicine);
+        sessionFactory.getCurrentSession().delete(orderingMedicine);
+
+        Prescription prescription = sessionFactory.getCurrentSession().createQuery("select p from Prescription p where p.prescriptionMedicine.name= 'простоферон'", Prescription.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(prescription);
+        sessionFactory.getCurrentSession().delete(prescription);
+
+        Medicine medicine = sessionFactory.getCurrentSession().createQuery("select m from Medicine m where m.name= 'простоферон' ", Medicine.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNotNull(medicine);
+
+        medicineService.delete(medicine);
+
+        Medicine theSameMedicine = sessionFactory.getCurrentSession().createQuery("select m from Medicine m where m.name= 'простоферон' ", Medicine.class)
+                .list()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNull("Entity is not null!", theSameMedicine);
+    }
 
     @Test
     public void testUpdate() {
