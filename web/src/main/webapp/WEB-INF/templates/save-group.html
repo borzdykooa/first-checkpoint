@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/saveGroup}" method="post">
+    <label for="pharmacyGroup">Введите название новой группы:
+        <input type="text" name="pharmacyGroup" id="pharmacyGroup">
+    </label><br>
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>

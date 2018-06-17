@@ -14,7 +14,7 @@ public class UserDetailsConverter {
                 .builder()
                 .username(user.getLogin())
                 .password(user.getPassword())
-                .authorities(new SimpleGrantedAuthority(user.getUserRole().toString()))
+                .authorities(new SimpleGrantedAuthority(user.getUserRole().name()))
                 .build();
     }
 

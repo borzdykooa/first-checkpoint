@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="medicine" type="com.borzdykooa.entity.Medicine"*/-->
+<form th:action="@{/saveMedicine}" method="post" th:object="${medicine}">
+
+    <label for="name">Введите название нового лекарства:</label>
+    <input type="text" name="name" id="name" th:field="*{name}">
+    <br>
+
+    <div>
+        <label for="pharmacyGroup">Группа лекарств</label>
+        <select id="pharmacyGroup" name="pharmacyGroup">
+            <option th:each="pharmacyGroup : ${pharmacyGroups}"
+                    th:value="${pharmacyGroup.id}"
+                    th:text="${pharmacyGroup.name}">
+            </option>
+        </select>
+    </div>
+
+    <label for="description">Описание:
+        <input type="text" name="description" id="description" th:field="*{description}">
+    </label><br>
+    <label for="price">Цена:
+        <input type="text" name="price" id="price">
+    </label><br>
+    <label for="quantity">Количество упаковок:
+        <input type="text" name="quantity" id="quantity">
+    </label><br>
+    Необходимость рецепта:
+    <input type="radio" name="needPrescription" th:value="false"><span>Нет</span>
+    <input type="radio" name="needPrescription" th:value="true"><span>Да</span>
+    <br>
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>

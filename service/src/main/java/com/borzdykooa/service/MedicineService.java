@@ -1,6 +1,8 @@
 package com.borzdykooa.service;
 
 import com.borzdykooa.dao.repository.MedicineDao;
+import com.borzdykooa.dto.PaginationDto;
+import com.borzdykooa.dto.SaveMedicineDto;
 import com.borzdykooa.entity.Medicine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,8 @@ public class MedicineService {
         this.medicineDao = medicineDao;
     }
 
-    public List<Medicine> findComplex(int limit, int page, String partName, String partDescription, Boolean needPrescription) {
-        return medicineDao.findComplex(limit, page, partName, partDescription, needPrescription);
+    public List<Medicine> findComplex(PaginationDto paginationDto) {
+        return medicineDao.findComplex(paginationDto);
     }
 
     public List<Medicine> findByPartName(String partName) {

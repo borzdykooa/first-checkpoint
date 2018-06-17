@@ -5,29 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<!--<div>-->
-    <!--<div th:each="">-->
-        <!--<h3>Список лекарств:</h3>-->
-        <!--<ol>-->
-            <!--< items="${requestScope.medicines}" var="medicine">-->
-            <!--<a href="${pageContext.request.contextPath}/medicineFullInfo?id=${medicine.id}">-->
-                <!--<li>${medicine.name}</li>-->
-            <!--</a><br>-->
-        <!--</-->
-        <!--&gt;-->
-        <!--</ol>-->
-    <!--</div>-->
-<!--</div>-->
 
-<!--<div class="pagination">-->
-    <!--<a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=${sessionScope.page-1}"-->
-       <!--class="prev">предыдущая</a>-->
-    <!--<a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=1">1</a>-->
-    <!--<a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=2">2</a>-->
-    <!--<a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=3">3</a>-->
-    <!--<a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=4">4</a>-->
-    <!--<a href="${pageContext.request.contextPath}/medicineComplex?partName=${sessionScope.partName}&partDescription=${sessionScope.partDescription}&needPrescription=${sessionScope.needPrescription}&limit=${sessionScope.limit}&page=${sessionScope.page+1}"-->
-       <!--class="next">следующая</a>-->
-<!--</div>-->
+
+<div>
+    <h3>Список лекарств:</h3>
+    <ol>
+        <form th:action="@{/medicines}" method="get">
+            <div th:each="medicine : ${medicines}">
+                <label>
+                    <a th:href="@{/medicineFullInfo(id=${medicine.id})}">
+                        <li><span th:text="${medicine.name}"></span></li>
+                    </a><br>
+                </label>
+            </div>
+        </form>
+    </ol>
+</div>
+
+
 </body>
 </html>

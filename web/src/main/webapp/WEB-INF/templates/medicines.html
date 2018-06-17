@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <h3>Список лекарств:</h3>
+    <ol>
+    <form th:action="@{/medicines}" method="get">
+        <div th:each="medicine : ${medicines}">
+            <label>
+                <a th:href="@{/medicineFullInfo(id=${medicine.id})}">
+                    <li><span th:text="${medicine.name}"></span></li>
+                </a><br>
+            </label>
+        </div>
+    </form>
+    </ol>
+</div>
+
+
+</body>
+</html>

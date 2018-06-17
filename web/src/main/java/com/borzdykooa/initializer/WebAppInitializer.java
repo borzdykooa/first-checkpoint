@@ -1,8 +1,6 @@
 package com.borzdykooa.initializer;
 
 import com.borzdykooa.config.DaoConfiguration;
-//import com.borzdykooa.config.PersistenceConfig;
-import com.borzdykooa.config.SecurityConfig;
 import com.borzdykooa.config.ServiceConfiguration;
 import com.borzdykooa.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -15,7 +13,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{DaoConfiguration.class, ServiceConfiguration.class, SecurityConfig.class};
+        return new Class[]{DaoConfiguration.class, ServiceConfiguration.class};
     }
 
     @Override

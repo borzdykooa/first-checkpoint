@@ -1,6 +1,7 @@
 package com.borzdykooa.service;
 
 import com.borzdykooa.config.TestServiceConfiguration;
+import com.borzdykooa.dto.PaginationDto;
 import com.borzdykooa.entity.Medicine;
 import com.borzdykooa.entity.OrderingMedicine;
 import com.borzdykooa.entity.PharmacyGroup;
@@ -170,7 +171,8 @@ public class MedicineServiceTest {
 
     @Test
     public void testFindComplex() {
-        List<Medicine> allMedicines = medicineService.findComplex(1, 1, "кот", "супер", true);
+        PaginationDto paginationDto = new PaginationDto(1, 1, "кот", "супер", true);
+        List<Medicine> allMedicines = medicineService.findComplex(paginationDto);
         assertThat(allMedicines, hasSize(1));
         List<String> names = allMedicines.stream().map(Medicine::getName).collect(toList());
         assertThat(names, contains("котоферон"));

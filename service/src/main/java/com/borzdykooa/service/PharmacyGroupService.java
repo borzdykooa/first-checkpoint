@@ -3,6 +3,7 @@ package com.borzdykooa.service;
 import com.borzdykooa.dao.repository.PharmacyGroupDao;
 import com.borzdykooa.entity.PharmacyGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,5 +38,10 @@ public class PharmacyGroupService {
 
     public void update(PharmacyGroup pharmacyGroup) {
         pharmacyGroupDao.update(pharmacyGroup);
+    }
+
+    @Cacheable(value = "group", key = "#root.args[0]")
+    public PharmacyGroup findByName(String name) {
+        return pharmacyGroupDao.findByName(name);
     }
 }

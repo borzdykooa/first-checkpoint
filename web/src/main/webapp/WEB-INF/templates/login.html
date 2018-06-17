@@ -5,14 +5,19 @@
     <title>Login</title>
 </head>
 <body>
+
+<div th:insert="~{header::language}"></div>
+
 <form th:action="@{/login}" method="post">
-    <label for="username">Username:
-        <input type="text" name="username" id="username">
-    </label><br>
-    <label for="password">Password:
-        <input type="password" name="password" id="password">
-    </label><br>
-    <input type="submit" value="Login">
+    <label for="username" th:text="#{login.login}">Логин (адрес электронной почты): </label>
+    <input type="text" name="username" id="username">
+    <br><br>
+    <label for="password" th:text="#{login.password}">Пароль: </label>
+    <input type="password" name="password" id="password">
+    <br><br>
+    <input type="submit" th:value="#{login.submit}">
+    <br><br>
+    <a th:href="@{/saveUser}"> <label th:text="#{login.register}">Зарегистироваться </label></a>
 </form>
 </body>
 </html>

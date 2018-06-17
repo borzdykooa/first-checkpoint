@@ -5,28 +5,38 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/medicineComplex}" method="get">
-    <label for="partName">Введите название лекарства:
-        <input type="text" name="partName" th:field="*{partName}" id="partName">
-    </label><br>
-    <label for="partDescription">Введите описание лекарства:
+
+<div th:insert="~{header::language}"></div>
+<div th:insert="~{header::welcome}"></div>
+<!--/*@thymesVar id="paginationDto" type="com.borzdykooa.dto.PaginationDto"*/-->
+<form th:action="@{/firstPage}" method="post" th:object="${paginationDto}">
+    <div>
+        <label for="partName" th:text="#{first.name}">Введите название лекарства: </label>
+        <input type="text" name="partName" id="partName" th:field="*{partName}">
+    </div>
+    <br>
+    <div>
+        <label for="partDescription" th:text="#{first.description}">Введите описание лекарства:</label>
         <input type="text" name="partDescription" th:field="*{partDescription}" id="partDescription">
-    </label><br>
-    <div>
-        Необходимость рецепта:
-        <input type="radio" name="needPrescription" checked th:field="*{needPrescription}"
-               value="false"><span>Нет</span>
-        <input type="radio" name="needPrescription" th:field="*{needPrescription}" value="true"><span>Да</span>
-
     </div>
-
+    <br>
     <div>
-        Сколько лекарств отображать на странице?
-        <input type="number" name="limit" th:field="*{limit}" value="20" min="1"/> <br>
+        <label th:text="#{first.prescription}">Необходимость рецепта:</label>
+        <input type="radio" th:field="*{needPrescription}" name="needPrescription" th:value="false">
+        <label th:text="#{first.no}">нет</label>
+        <input type="radio" th:field="*{needPrescription}" name="needPrescription" th:value="true">
+        <label for="partDescription" th:text="#{first.yes}">да</label>
+        <br>
     </div>
-    <input type="hidden" name="page" th:field="*{page}" value="1"/><br>
-
-    <input type="submit" value="Найти">
+    <div>
+        <br>
+        <label th:text="#{first.quantity}">Сколько лекарств отображать на странице?</label>
+        <input type="number" name="limit" th:field="*{limit}" min="1"/> <br>
+    </div>
+    <div>
+        <input type="hidden" name="page" th:field="*{page}" min="1"/> <br>
+    </div>
+    <input type="submit" th:value="#{first.find}">
 </form>
 </body>
 </html>
