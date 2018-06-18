@@ -26,10 +26,10 @@
         <input type="text" name="description" id="description" th:field="*{description}">
     </label><br>
     <label for="price">Цена:
-        <input type="text" name="price" id="price">
+        <input type="number" name="price" id="price" step="0.01" min="0.00" placeholder="*.**">
     </label><br>
     <label for="quantity">Количество упаковок:
-        <input type="text" name="quantity" id="quantity">
+        <input type="number" name="quantity" id="quantity" step="1" min="0">
     </label><br>
     Необходимость рецепта:
     <input type="radio" name="needPrescription" th:value="false"><span>Нет</span>

@@ -5,10 +5,9 @@
     <title>Login</title>
 </head>
 <body>
-
 <div th:insert="~{header::language}"></div>
 <br><br>
-<form th:action="@{/login}" method="post">
+<form th:action="@{/saveUser}" method="post">
     <label for="username" th:text="#{login.login}">Логин (адрес электронной почты): </label>
     <input type="text" name="username" id="username">
     <br><br>
@@ -18,6 +17,5 @@
     <input type="submit" th:value="#{login.submit}">
     <br><br>
 </form>
-<a th:href="@{/saveUser}"> <label th:text="#{login.register}">Зарегистироваться </label></a>
 </body>
 </html>
