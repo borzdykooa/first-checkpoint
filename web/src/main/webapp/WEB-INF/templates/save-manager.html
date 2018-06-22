@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form th:action="@{/saveManager}" method="post">
+    <label for="username">Логин (адрес электронной почты): </label>
+    <input type="text" name="username" id="username">
+    <br><br>
+    <label for="password">Пароль: </label>
+    <input type="password" name="password" id="password">
+    <br><br>
+        <input type="submit" value="Сохранить">
+    <br><br>
+</form>
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+</body>
+</html>

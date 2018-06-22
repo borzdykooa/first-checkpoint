@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -30,8 +32,8 @@ public class CacheTest {
 
     @Test
     public void testFindByName() {
-        PharmacyGroup group = pharmacyGroupService.findByName("антидепрессанты");
-        PharmacyGroup theSameGroup = pharmacyGroupService.findByName("антидепрессанты");
-        assertThat("Results are not equal!", group.equals(theSameGroup));
+        List<PharmacyGroup> groups = pharmacyGroupService.findByName("антидепрессанты");
+        List<PharmacyGroup> theSameGroups = pharmacyGroupService.findByName("антидепрессанты");
+        assertThat("Results are not equal!", groups.equals(theSameGroups));
     }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <h3>Список заказов:</h3>
+    <ol>
+        <form th:action="@{/userOrders}" method="get">
+            <div th:each="orderingMedicine : ${orderingMedicines}">
+                <label>
+                    <h3>
+                        <label>
+                            <a th:href="@{/medicineFullInfo(id=${orderingMedicine.medicine.id})}">
+                                <li><span th:text="${orderingMedicine.medicine.name}"></span></li>
+                            </a>
+                        </label>
+                        <!--<li><span th:text="${orderingMedicine.medicine.name}"></span></li>-->
+                    </h3>
+                    Количество упаковок: <span th:text="${orderingMedicine.quantity}"></span><br>
+                    Дата заказа: <span th:text="${orderingMedicine.ordering.dateOfOrdering}"></span><br>
+                    Сумма: <span th:text="${orderingMedicine.quantity*orderingMedicine.medicine.saleInfo.price}"></span>
+                    бел.руб.<br>
+                </label>
+            </div>
+        </form>
+    </ol>
+</div>
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::basket}"></div>
+<div th:insert="~{header::logout}"></div>
+
+</body>
+</html>

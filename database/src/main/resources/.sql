@@ -48,7 +48,7 @@ CREATE TABLE online_pharmacy.medicine (
 
 CREATE TABLE online_pharmacy.ordering (
   id                     BIGSERIAL PRIMARY KEY,
-  date_of_ordering       DATE                   NOT NULL DEFAULT now(),
+  date_of_ordering       DATE                   NOT NULL,
   ordering_clothing_date DATE,
   status                 CHARACTER VARYING(255) NOT NULL,
   total_sum              NUMERIC(19, 2)         NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE online_pharmacy.prescription (
 
 CREATE TABLE online_pharmacy.review (
   id          BIGSERIAL PRIMARY KEY,
-  mark        CHARACTER VARYING(255) NOT NULL,
+  mark        INTEGER NOT NULL,
   comment     TEXT                   NOT NULL,
   date_time   TIMESTAMP              NOT NULL DEFAULT now(),
   user_id     BIGINT                 NOT NULL REFERENCES online_pharmacy."user" (id),
@@ -116,25 +116,52 @@ INSERT INTO online_pharmacy.medicine (name, description, pharmacy_group_id, sale
   ('Фуразолидон','применяется при пищевом типе токсикоинфекций, паратифе, дизентерии бациллярной формы, лямблиозах, инфекциях мочеполового тракта (пиелите, цистите, уретрите), вызванных трихомонадами, а также в терапии ожогов и инфицированных кожных поверхностей в оперативной медицине',(SELECT id FROM online_pharmacy.pharmacy_group WHERE name = 'желудочно-кишечные препараты'),(SELECT id FROM online_pharmacy.sale_info WHERE id='10')),
   ('Зинерит','лечение угревой сыпи',(SELECT id FROM online_pharmacy.pharmacy_group WHERE name = 'дерматологические препараты'),(SELECT id FROM online_pharmacy.sale_info WHERE id='11'));
 
-INSERT INTO online_pharmacy."user" (login, password)
-VALUES
-  ('borzdykooa@mail.ru','admin'),
-  ('lula_m@mail.ru', 'pass');
+INSERT INTO online_pharmacy."user" (login, password, user_role) VALUES
+  ('borzdykooa@mail.ru', '$2a$10$rcEJb9JBWAyAgIE1nngfNOEFlXKPEZL7pQjjmukY40iB6mFEQUW/K', 'ADMIN'),
+  ('manager', '$2a$10$rcEJb9JBWAyAgIE1nngfNOEFlXKPEZL7pQjjmukY40iB6mFEQUW/K', 'ADMIN'),
+  ('lula_m@mail.ru', '$2a$10$rcEJb9JBWAyAgIE1nngfNOEFlXKPEZL7pQjjmukY40iB6mFEQUW/K', 'CLIENT'),
+  ('test@mail.ru', '$2a$10$rcEJb9JBWAyAgIE1nngfNOEFlXKPEZL7pQjjmukY40iB6mFEQUW/K', 'CLIENT');
 
+INSERT INTO online_pharmacy.client (last_name, first_name, patronymic, date_of_birth, telephone_number, address, user_id) VALUES
+  ('Мелешко','Юлия','Викторовна','02.07.1989','159874','Минск, Жудро',(SELECT id FROM online_pharmacy."user" WHERE login='lula_m@mail.ru')),
+  ('Test client surname','Test client name','Test client patronymic','01.01.2000','8595255','Minsk',(SELECT id FROM online_pharmacy."user" WHERE login='test@mail.ru'));
 
-INSERT INTO online_pharmacy.ordering (date_of_ordering, ordering_clothing_date, status, total_sum, user_id)
-VALUES ('22.03.2018', '23.03.2018', 'DONE', '55',
-        (SELECT id
-         FROM online_pharmacy.user
-         WHERE id = 2));
+INSERT INTO online_pharmacy.admin (admin_role, user_id) VALUES
+  ('SUPER_ADMIN',(SELECT id FROM online_pharmacy."user" WHERE id=1)),
+  ('PRESCRIPTION_MANAGER',(SELECT id FROM online_pharmacy."user" WHERE id=2));
+
+INSERT INTO online_pharmacy.ordering (date_of_ordering, ordering_clothing_date, status, total_sum, user_id) VALUES
+  ('22.03.2018', '23.03.2018', 'DONE', '55', (SELECT id
+                                              FROM online_pharmacy.user
+                                              WHERE id = 2)),
+  ('22.05.2018', NULL, 'PROCESSED', '123', (SELECT id
+                                            FROM online_pharmacy.user
+                                            WHERE id = 2));
 
 INSERT INTO online_pharmacy.ordering_medicine (ordering_id, medicine_id, quantity) VALUES
   ((SELECT id
     FROM online_pharmacy.ordering
     WHERE id = '1'), (SELECT id
                       FROM online_pharmacy.medicine
-                      WHERE id = '3'), '25');
+                      WHERE id = '3'), '25'),
+  ((SELECT id
+    FROM online_pharmacy.ordering
+    WHERE id = '1'), (SELECT id
+                      FROM online_pharmacy.medicine
+                      WHERE id = '6'), '7'),
+  ((SELECT id
+    FROM online_pharmacy.ordering
+    WHERE id = '2'), (SELECT id
+                      FROM online_pharmacy.medicine
+                      WHERE id = '1'), '1');
 
 
+INSERT INTO online_pharmacy.prescription (name, user_id, medicine_id, quantity, validity) VALUES
+  ('5555',(SELECT id FROM online_pharmacy."user" WHERE login='lula_m@mail.ru'),(SELECT id FROM online_pharmacy.medicine WHERE id=5),10,'23.07.2018'),
+  ('4444',(SELECT id FROM online_pharmacy."user" WHERE login='test@mail.ru'),(SELECT id FROM online_pharmacy.medicine WHERE id=1),11,'23.08.2018');
 
-DROP TABLE online_pharmacy.pharmacy_group;
+INSERT INTO online_pharmacy.review (mark, comment, user_id, medicine_id) VALUES
+  (9,'Замечательное лекарство',(SELECT id FROM online_pharmacy."user" WHERE login='lula_m@mail.ru'),(SELECT id FROM online_pharmacy.medicine WHERE id=5)),
+  (10,'Стало даже лучше!',(SELECT id FROM online_pharmacy."user" WHERE login='lula_m@mail.ru'),(SELECT id FROM online_pharmacy.medicine WHERE id=5)),
+  (3,'А мне не очень',(SELECT id FROM online_pharmacy."user" WHERE login='test@mail.ru'),(SELECT id FROM online_pharmacy.medicine WHERE id=5));
+

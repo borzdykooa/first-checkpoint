@@ -2,6 +2,7 @@ package com.borzdykooa.service;
 
 import com.borzdykooa.dao.repository.OrderingMedicineDao;
 import com.borzdykooa.entity.OrderingMedicine;
+import com.borzdykooa.entity.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,8 +24,8 @@ public class OrderingMedicineService {
         return orderingMedicineDao.findOrderingByMedicineId(id);
     }
 
-    public List<OrderingMedicine> findOrderingByUserId(Long id) {
-        return orderingMedicineDao.findOrderingByUserId(id);
+    public List<OrderingMedicine> findOrderingByUserLogin(String userLogin) {
+        return orderingMedicineDao.findOrderingByUserLogin(userLogin);
     }
 
     public OrderingMedicine find(Long id) {
@@ -45,5 +46,9 @@ public class OrderingMedicineService {
 
     public void update(OrderingMedicine orderingMedicine) {
         orderingMedicineDao.update(orderingMedicine);
+    }
+
+    public List<OrderingMedicine> findProcessedOrdering(Status status){
+        return orderingMedicineDao.findProcessedOrdering(status);
     }
 }

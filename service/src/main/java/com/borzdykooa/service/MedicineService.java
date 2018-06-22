@@ -2,7 +2,6 @@ package com.borzdykooa.service;
 
 import com.borzdykooa.dao.repository.MedicineDao;
 import com.borzdykooa.dto.PaginationDto;
-import com.borzdykooa.dto.SaveMedicineDto;
 import com.borzdykooa.entity.Medicine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +50,9 @@ public class MedicineService {
 
     public void update(Medicine medicine) {
         medicineDao.update(medicine);
+    }
+
+    public List<Medicine> findAllNeedPrescription(){
+        return medicineDao.findAllNeedPrescription();
     }
 }

@@ -1,7 +1,6 @@
 package com.borzdykooa.service;
 
 import com.borzdykooa.config.TestServiceConfiguration;
-import com.borzdykooa.entity.Client;
 import com.borzdykooa.entity.Medicine;
 import com.borzdykooa.entity.Ordering;
 import com.borzdykooa.entity.OrderingMedicine;
@@ -57,18 +56,18 @@ public class OrderingMedicineServiceTest {
         assertThat(orderingByMedicineId, hasSize(1));
     }
 
-    @Test
-    public void findOrderingByUserId() {
-        Client client = sessionFactory.getCurrentSession().createQuery("select c from Client c where c.login='ivan'", Client.class)
-                .list()
-                .stream()
-                .findFirst()
-                .orElse(null);
-        assertNotNull(client);
-
-        List<OrderingMedicine> orderingByMedicineId = orderingMedicineService.findOrderingByUserId(client.getId());
-        assertThat(orderingByMedicineId, hasSize(1));
-    }
+//    @Test
+//    public void findOrderingByUserId() {
+//        Client client = sessionFactory.getCurrentSession().createQuery("select c from Client c where c.login='ivan'", Client.class)
+//                .list()
+//                .stream()
+//                .findFirst()
+//                .orElse(null);
+//        assertNotNull(client);
+//
+//        List<OrderingMedicine> orderingByMedicineId = orderingMedicineService.findOrderingByUserId(client.getId());
+//        assertThat(orderingByMedicineId, hasSize(1));
+//    }
 
     @Test
     public void testFind() {

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/updateGroup}" method="post">
+
+<div>
+    <label for="pharmacyGroup">Группа лекарств</label>
+    <select id="pharmacyGroup" name="pharmacyGroup">
+        <option th:each="pharmacyGroup : ${pharmacyGroups}"
+                th:value="${pharmacyGroup.id}"
+                th:text="${pharmacyGroup.name}">
+        </option>
+    </select>
+</div>
+
+    <label for="updatedPharmacyGroup">Введите новое название группы:
+        <input type="text" name="updatedPharmacyGroup" id="updatedPharmacyGroup">
+    </label><br>
+    <input type="submit" value="Сохранить">
+</form>
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+</body>
+</html>

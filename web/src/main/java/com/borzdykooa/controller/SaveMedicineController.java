@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class SaveMedicineController {
+public class SaveMedicineController extends BaseController {
 
     @Autowired
     private PharmacyGroupService pharmacyGroupService;
@@ -39,7 +39,7 @@ public class SaveMedicineController {
     }
 
     @PostMapping("/saveMedicine")
-    public String saveMedicine(SaleInfo saleInfo,String name, String description, Long pharmacyGroup) {
+    public String saveMedicine(SaleInfo saleInfo, String name, String description, Long pharmacyGroup) {
         saleInfoService.save(saleInfo);
         PharmacyGroup pg = pharmacyGroupService.find(pharmacyGroup);
         Medicine medicine = new Medicine(name, description, pg, saleInfo);

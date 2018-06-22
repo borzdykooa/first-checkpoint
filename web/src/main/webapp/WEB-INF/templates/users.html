@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <h3>Список клиентов:</h3>
+    <ol>
+        <form th:action="@{/users}" method="get">
+            <div th:each="client : ${clients}">
+                <label>
+                    <!--<a th:href="@{/medicineFullInfo(id=${medicine.id})}">-->
+                    <h3>
+                        <li><span th:text="${client.login}"></span></li>
+                    </h3>
+                    Фамилия: <span th:text="${client.fullName.lastName}"></span><br>
+                    Имя: <span th:text="${client.fullName.firstName}"></span><br>
+                    Отчество: <span th:text="${client.fullName.patronymic}"></span><br>
+                    Дата рождения: <span th:text="${client.dateOfBirth}"></span><br>
+                    Номер телефона: <span th:text="${client.telephoneNumber}"></span><br>
+                    Адрес: <span th:text="${client.address}"></span><br><br>
+                    <!--</a><br>-->
+                </label>
+            </div>
+        </form>
+    </ol>
+</div>
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+
+</body>
+</html>

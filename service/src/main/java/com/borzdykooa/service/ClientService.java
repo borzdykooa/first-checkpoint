@@ -38,4 +38,8 @@ public class ClientService {
     public void update(Client client) {
         clientDao.update(client);
     }
+
+    public Client findByLogin(String login) {
+        return clientDao.findByLogin(login);
+    }
 }

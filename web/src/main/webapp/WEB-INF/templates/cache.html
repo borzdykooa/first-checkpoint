@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/cache}" method="post">
+    <div>
+        <label for="name">Введите название лекарственной группы: </label>
+        <input type="text" name="name" id="name">
+    </div>
+    <br>
+
+    <input type="submit" th:value="Найти">
+</form>
+
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+</body>
+</html>

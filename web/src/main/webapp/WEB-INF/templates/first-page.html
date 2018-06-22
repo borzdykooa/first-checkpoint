@@ -1,42 +1,125 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-<div th:insert="~{header::language}"></div>
 <div th:insert="~{header::welcome}"></div>
-<!--/*@thymesVar id="paginationDto" type="com.borzdykooa.dto.PaginationDto"*/-->
-<form th:action="@{/firstPage}" method="post" th:object="${paginationDto}">
-    <div>
-        <label for="partName" th:text="#{first.name}">Введите название лекарства: </label>
-        <input type="text" name="partName" id="partName" th:field="*{partName}">
-    </div>
-    <br>
-    <div>
-        <label for="partDescription" th:text="#{first.description}">Введите описание лекарства:</label>
-        <input type="text" name="partDescription" th:field="*{partDescription}" id="partDescription">
-    </div>
-    <br>
-    <div>
-        <label th:text="#{first.prescription}">Необходимость рецепта:</label>
-        <input type="radio" th:field="*{needPrescription}" name="needPrescription" th:value="false">
-        <label th:text="#{first.no}">нет</label>
-        <input type="radio" th:field="*{needPrescription}" name="needPrescription" th:value="true">
-        <label for="partDescription" th:text="#{first.yes}">да</label>
+
+<div sec:authorize="hasAuthority('CLIENT')">
+
+    <div th:insert="~{header::language}"></div>
+
+
+    <h3><label th:text="#{first.complex}">Вы можете найти лекарство, воспользовавшись сложным поиском: </label></h3>
+    <!--/*@thymesVar id="paginationDto" type="com.borzdykooa.dto.PaginationDto"*/-->
+    <form th:action="@{/firstPage}" method="post" th:object="${paginationDto}">
+        <div>
+            <label for="partName" th:text="#{first.name}">Введите название лекарства: </label>
+            <input type="text" name="partName" id="partName" th:field="*{partName}">
+        </div>
         <br>
-    </div>
-    <div>
+        <div>
+            <label for="partDescription" th:text="#{first.description}">Введите описание лекарства:</label>
+            <input type="text" name="partDescription" th:field="*{partDescription}" id="partDescription">
+        </div>
         <br>
-        <label th:text="#{first.quantity}">Сколько лекарств отображать на странице?</label>
-        <input type="number" name="limit" th:field="*{limit}" min="1"/> <br>
-    </div>
+        <div>
+            <label th:text="#{first.prescription}">Необходимость рецепта:</label>
+            <input type="radio" th:field="*{needPrescription}" name="needPrescription" th:value="false">
+            <label th:text="#{first.no}">нет</label>
+            <input type="radio" th:field="*{needPrescription}" name="needPrescription" th:value="true">
+            <label for="partDescription" th:text="#{first.yes}">да</label>
+            <br>
+        </div>
+        <div>
+            <br>
+            <label th:text="#{first.quantity}">Сколько лекарств отображать на странице?</label>
+            <input type="number" name="limit" th:field="*{limit}" min="1"/> <br>
+        </div>
+        <div>
+            <input type="hidden" name="page" th:field="*{page}" min="1"/> <br>
+        </div>
+        <input type="submit" th:value="#{first.find}">
+    </form>
+
+    <h3><label th:text="#{first.groups}">либо поиском по лекарственным группам: </label></h3>
+
     <div>
-        <input type="hidden" name="page" th:field="*{page}" min="1"/> <br>
+        <ol>
+            <form th:action="@{/groups}" method="get">
+                <div th:each="group : ${groups}">
+                    <label>
+                        <a th:href="@{/medicinesInGroup(id=${group.id})}">
+                            <li><span th:text="${group.name}"></span></li>
+                        </a><br>
+                    </label>
+                </div>
+            </form>
+        </ol>
     </div>
-    <input type="submit" th:value="#{first.find}">
-</form>
+
+    <a th:href="@{/userPrescriptions}" th:text="#{first.prescriptions}">Список рецептов</a><br><br>
+    <a th:href="@{/userOrders}" th:text="#{first.orders}">Список заказов</a><br><br>
+    <div th:insert="~{header::basket}"></div>
+</div>
+
+
+<div sec:authorize="hasAuthority('ADMIN')">
+    <div th:if="${login=='borzdykooa@mail.ru'}">
+        <h2>Функции суперадминистратора</h2>
+        <ol>
+            <li><a th:href="@{/saveMedicine}">Сохранить новое лекарство</a></li>
+            <br>
+            <li><a th:href="@{/updateMedicine}">Изменить лекарство</a></li>
+            <br>
+            <li><a th:href="@{/saveGroup}">Сохранить новую лекарственную группу</a></li>
+            <br>
+            <li><a th:href="@{/updateGroup}">Изменить лекарственную группу</a></li>
+            <br>
+            <li><a th:href="@{/savePrescription}">Сохранить электронный рецепт</a></li>
+            <br>
+            <li><a th:href="@{/users}">Посмотреть список всех пользователей</a></li>
+            <br>
+            <li><a th:href="@{/cache}">Найти группу (cache)</a></li>
+            <br>
+            <li><a th:href="@{/medicinesList}">Посмотреть список всех лекарств</a></li>
+            <br>
+            <li><a th:href="@{/saveManager}">Создать учетную запись менеждера по рецептам</a></li>
+            <br>
+            <li><a th:href="@{/updateOrders}">Закрыть заказ</a></li>
+            <br>
+        </ol>
+    </div>
+    <div th:if="${login!='borzdykooa@mail.ru'}">
+        <h2>Функции менеджера электронных рецептов</h2>
+        <ol>
+            <br>
+            <li><a th:href="@{/savePrescription}">Сохранить электронный рецепт</a></li>
+            <br>
+            <li><a th:href="@{/deletePrescription}">Удалить электронный рецепт</a></li>
+            <br>
+            <li><a th:href="@{/updatePrescription}">Изменить электронный рецепт</a></li>
+            <br>
+            <li><a th:href="@{/prescriptions}">Посмотреть список электронных рецептов</a></li>
+            <br><br>
+        </ol>
+    </div>
+</div>
+
+<!--<div th:unless="${#lists.isEmpty(errors)}" th:fragment="error">-->
+<!--<section class="site-section-errors">-->
+<!--<div class="container text-center" th:each="error : ${errors}">-->
+<!--<p th:text="${error}">Error description</p>-->
+<!--</div>-->
+<!--</section>-->
+<!--&lt;!&ndash; END error section &ndash;&gt;-->
+<!--</div>-->
+
+
+<div th:insert="~{header::logout}"></div>
+
 </body>
 </html>

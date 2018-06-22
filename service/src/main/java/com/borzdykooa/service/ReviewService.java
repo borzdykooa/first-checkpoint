@@ -38,4 +38,8 @@ public class ReviewService {
     public void update(Review review) {
         reviewDao.update(review);
     }
+
+    public List<Review> findAllByMedicineId(Long id) {
+        return reviewDao.findAllByMedicineId(id);
+    }
 }

@@ -20,4 +20,9 @@ public class UserService {
     public User findByLogin(String login) {
         return userDao.findByLogin(login);
     }
+
+    public Long save(User user) {
+        return userDao.save(user);
+    }
+
 }

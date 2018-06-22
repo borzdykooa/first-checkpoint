@@ -41,7 +41,7 @@ public class PharmacyGroupService {
     }
 
     @Cacheable(value = "group", key = "#root.args[0]")
-    public PharmacyGroup findByName(String name) {
+    public List<PharmacyGroup> findByName(String name) {
         return pharmacyGroupDao.findByName(name);
     }
 }

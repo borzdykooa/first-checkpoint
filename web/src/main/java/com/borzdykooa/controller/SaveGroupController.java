@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class SaveGroupController {
+public class SaveGroupController extends BaseController {
 
     @Autowired
     private PharmacyGroupService pharmacyGroupService;

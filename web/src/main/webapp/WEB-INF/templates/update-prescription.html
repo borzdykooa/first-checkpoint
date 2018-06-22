@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="medicine" type="com.borzdykooa.entity.Medicine"*/-->
+<form th:action="@{/updatePrescription}" method="post">
+
+    <div>
+        <label for="prescription">Рецепт</label>
+        <select id="prescription" name="prescription">
+            <option th:each="prescription : ${prescriptions}"
+                    th:value="${prescription.id}"
+                    th:text="${prescription.name}">
+            </option>
+        </select>
+    </div>
+
+
+    <div>
+        <label for="medicine">Лекарство</label>
+        <select id="medicine" name="medicine">
+            <option th:each="medicine : ${medicines}"
+                    th:value="${medicine.id}"
+                    th:text="${medicine.name}">
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label for="client">Клиент</label>
+        <select id="client" name="client">
+            <option th:each="client : ${clients}"
+                    th:value="${client.id}"
+                    th:text="${client.login}">
+            </option>
+        </select>
+    </div>
+
+    Введите новый уникальный номер рецепта:
+    <input type="number" name="newName" id="newName">
+    <br>
+
+    <label for="newValidity">Срок действия:
+        <input type="date" name="newValidity" id="newValidity">
+    </label><br>
+    <label for="newQuantity">Количество упаковок:
+        <input type="number" name="newQuantity" id="newQuantity" step="1" min="0">
+    </label><br>
+
+    <input type="submit" value="Изменить">
+</form>
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+</body>
+</html>

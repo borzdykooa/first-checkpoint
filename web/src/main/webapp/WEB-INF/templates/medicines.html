@@ -10,17 +10,35 @@
 <div>
     <h3>Список лекарств:</h3>
     <ol>
-    <form th:action="@{/medicines}" method="get">
-        <div th:each="medicine : ${medicines}">
-            <label>
-                <a th:href="@{/medicineFullInfo(id=${medicine.id})}">
-                    <li><span th:text="${medicine.name}"></span></li>
-                </a><br>
-            </label>
-        </div>
-    </form>
+        <form th:action="@{/medicineComplex}" method="get">
+            <div th:each="medicine : ${medicines}">
+                <label>
+                    <a th:href="@{/medicineFullInfo(id=${medicine.id})}">
+                        <li><span th:text="${medicine.name}"></span></li>
+                    </a><br>
+                </label>
+            </div>
+        </form>
     </ol>
 </div>
+<br><br>
+
+
+
+<form th:action="@{/medicines}" method="get">
+    <div>
+        <a th:href="@{/medicines(partName=${paginationDto.partName},partDescription=${paginationDto.partDescription},needPrescription=${paginationDto.needPrescription},limit=${paginationDto.limit},page=(${paginationDto.page}-1))}">предыдущая</a>
+        <a th:href="@{/medicines(partName=${paginationDto.partName},partDescription=${paginationDto.partDescription},needPrescription=${paginationDto.needPrescription},limit=${paginationDto.limit},page=1)}">1</a>
+        <a th:href="@{/medicines(partName=${paginationDto.partName},partDescription=${paginationDto.partDescription},needPrescription=${paginationDto.needPrescription},limit=${paginationDto.limit},page=2)}">2</a>
+        <a th:href="@{/medicines(partName=${paginationDto.partName},partDescription=${paginationDto.partDescription},needPrescription=${paginationDto.needPrescription},limit=${paginationDto.limit},page=3)}">3</a>
+        <a th:href="@{/medicines(partName=${paginationDto.partName},partDescription=${paginationDto.partDescription},needPrescription=${paginationDto.needPrescription},limit=${paginationDto.limit},page=(${paginationDto.page}+1))}">следующая</a>
+    </div>
+</form>
+
+
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
 
 
 </body>

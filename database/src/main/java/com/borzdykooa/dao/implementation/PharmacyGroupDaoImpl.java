@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class PharmacyGroupDaoImpl extends BaseDaoImpl<Long, PharmacyGroup> implements PharmacyGroupDao {
 
@@ -13,13 +15,10 @@ public class PharmacyGroupDaoImpl extends BaseDaoImpl<Long, PharmacyGroup> imple
     private SessionFactory sessionFactory;
 
     @Override
-    public PharmacyGroup findByName(String name) {
+    public List<PharmacyGroup> findByName(String name) {
         return sessionFactory.getCurrentSession()
-                .createQuery("select p from PharmacyGroup p where p.name=:name", PharmacyGroup.class)
-                .setParameter("name", name)
-                .list()
-                .stream()
-                .findFirst()
-                .orElse(null);
+                .createQuery("select p from PharmacyGroup p where p.name like :name", PharmacyGroup.class)
+                .setParameter("name", "%" + name.toLowerCase() + "%")
+                .list();
     }
 }

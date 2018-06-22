@@ -15,10 +15,10 @@ public class ViewAllMedicinesController {
     @Autowired
     private MedicineService medicineService;
 
-    @GetMapping("/medicines")
+    @GetMapping("/medicinesList")
     public String showAllMedicines(Model model) {
         List<Medicine> medicines = medicineService.findAll();
         model.addAttribute("medicines", medicines);
-        return "medicines";
+        return "medicines-list";
     }
 }

@@ -6,12 +6,31 @@
 </head>
 <body>
 <div th:fragment="welcome">
-    <h2><label th:text="#{head.welcome}">Добро пожаловать!</label></h2>
+    <h1><label th:text="#{head.welcome}">Добро пожаловать!</label></h1>
 </div>
 <div th:fragment="language">
     <a href="?language=ru_RU">Русский</a>
     <a href="?language=en_US">English</a>
     <br>
 </div>
+
+<div th:fragment="logout">
+    <form th:action="@{/logout}" method="post">
+        <br><br>
+        <input type="submit" value="Logout" th:value="#{header.logout}"/>
+        <br><br>
+    </form>
+</div>
+
+<div th:fragment="start">
+    <a th:href="@{/firstPage}" th:text="#{header.start}">Вернуться на начальную страницу</a><br>
+    <br><br>
+</div>
+
+<div th:fragment="basket">
+    <a th:href="@{/basket}" th:text="#{header.basket}">Корзина</a><br>
+    <br><br>
+</div>
+
 </body>
 </html>

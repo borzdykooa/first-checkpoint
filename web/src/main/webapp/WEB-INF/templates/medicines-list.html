@@ -10,10 +10,11 @@
 <div>
     <h3>Список лекарств:</h3>
     <ol>
-        <form th:action="@{/medicines}" method="get">
+        <form th:action="@{/medicineComplex}" method="get">
             <div th:each="medicine : ${medicines}">
                 <label>
                     <a th:href="@{/medicineFullInfo(id=${medicine.id})}">
+                        <!--firstPage?partName=А&partDescription=А&needPrescription=false&limit=10&page=1-->
                         <li><span th:text="${medicine.name}"></span></li>
                     </a><br>
                 </label>
@@ -21,7 +22,9 @@
         </form>
     </ol>
 </div>
-
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
 
 </body>
 </html>

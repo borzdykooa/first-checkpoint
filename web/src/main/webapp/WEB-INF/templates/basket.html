@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div th:if="${addToBasket!=null}">
+    <div>
+        <h3>Список лекарств:</h3>
+        <ol>
+            <div th:each="basketDto : ${addToBasket}">
+                <label>
+                    <li><span th:text="${basketDto.medicineName}"></span>
+                        <p>Цена: <span th:text="${basketDto.medicinePrice}"></span> бел.руб.</p>
+                        <p>Количество упаковок: <span th:text="${basketDto.orderQuantity}"></span></p>
+                        <p>Стоимость: <span th:text="${basketDto.sum}"></span> бел.руб.</p>
+                    </li>
+                </label>
+            </div>
+        </ol>
+    </div>
+    <h4>Общая стоимость товаров в корзине: <span th:text="${totalSum}"></span> бел.руб.</h4><br>
+    <form th:action="@{/basket}" method="post">
+        <input type="submit" value="Очистить корзину"><br>
+    </form>
+
+    <form th:action="@{/saveOrder}" method="get">
+        <input type="submit" value="Перейти к заказу"><br>
+    </form>
+</div>
+
+<div th:if="${addToBasket==null}">
+    Ваша корзина пуста!<br><br>
+</div>
+
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+</body>
+</html>

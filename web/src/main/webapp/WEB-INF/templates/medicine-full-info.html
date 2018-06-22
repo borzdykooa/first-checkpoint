@@ -1,36 +1,96 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<p>
 
 
 <h3><!--/*@thymesVar id="medicine" type="com.borzdykooa.entity.Medicine"*/-->
-<span th:text="${medicine.name}"></span></h3>
+    <span th:text="${medicine.name}"></span></h3>
 
 <p>Описание препарата: <span th:text="${medicine.description}"></span></p>
 <p>Цена препарата: <span th:text="${medicine.saleInfo.price}"></span> бел.руб.</p>
-<p>Количество упаковок в наличии: <span th:text="${medicine.saleInfo.quantity}"></span> </p>
-<p>Лекарственная группа: <span th:text="${medicine.pharmacyGroup.name}"></span> </p>
+<p>Количество упаковок в наличии: <span th:text="${medicine.saleInfo.quantity}"></span></p>
+<p>Лекарственная группа: <span th:text="${medicine.pharmacyGroup.name}"></span></p>
+<p>Рецепт:
+    <span th:if="${medicine.saleInfo.needPrescription==true}">необходим для покупки</span>
+    <span th:if="${medicine.saleInfo.needPrescription==false}">не нужен</span></p>
+
+<!--<span th:text="${medicine.saleInfo.needPrescription}"></span></p>-->
 
 
-<!--<form th:action="@{/medicineFullInfo}" method="get">-->
+<div th:if="${medicine.saleInfo.needPrescription==false}">
+    <form th:action="@{/addToBasket}" method="get" th:object="${basketDto}">
+        <input type="hidden" name="medicineId" th:value="${medicine.id}"/><br>
+        <input type="hidden" name="medicineName" th:value="${medicine.name}"/><br>
+        <input type="hidden" name="medicinePrice" th:value="${medicine.saleInfo.price}"/><br>
+        <input type="hidden" name="medicineQuantity" th:value="${medicine.saleInfo.quantity}"/><br>
 
-    <!--<input type="hidden" name="medicineId" value="${requestScope.medicine.id}"/><br>-->
-    <!--<input type="hidden" name="medicineName" value="${requestScope.medicine.name}"/><br>-->
-    <!--<input type="hidden" name="medicinePrice" value="${requestScope.medicine.price}"/><br>-->
-    <!--<input type="hidden" name="medicineQuantity" value="${requestScope.medicine.quantity}"/><br>-->
+        Количество упаковок для заказа: <br>
+        <input type="number" name="orderQuantity" value="1" min="1" th:max="${medicine.saleInfo.quantity}"/>
+        <br>
+        <input type="submit" value="Добавить в корзину">
+    </form>
+</div>
+
+<div th:if="${medicine.saleInfo.needPrescription==true}">
+    <div th:if="${!prescriptions.isEmpty()}">
+        <form th:action="@{/addToBasket}" method="get" th:object="${basketDto}">
+            <input type="hidden" name="medicineId" th:value="${medicine.id}"/><br>
+            <input type="hidden" name="medicineName" th:value="${medicine.name}"/><br>
+            <input type="hidden" name="medicinePrice" th:value="${medicine.saleInfo.price}"/><br>
+            <input type="hidden" name="medicineQuantity" th:value="${medicine.saleInfo.quantity}"/><br>
+
+            <div th:if="${prescription.quantity<medicine.saleInfo.quantity}">
+                Количество упаковок для заказа: <br>
+                <input type="number" name="orderQuantity" value="1" min="1" th:max="${prescription.quantity}"/>
+                <br></div>
+            <div th:if="${prescription.quantity>=medicine.saleInfo.quantity}">
+                Количество упаковок для заказа: <br>
+                <input type="number" name="orderQuantity" value="1" min="1" th:max="${medicine.saleInfo.quantity}"/>
+                <br></div>
+            <h4>Внимание, количество упаковок для заказа органичено Вашим рецептом!</h4>
+            <input type="submit" value="Добавить в корзину">
+        </form>
+    </div>
+    <div th:if="${prescriptions.isEmpty()}">
+        <h3>К сожалению, без рецепта Вы не можете заказать данное лекарство!</h3>
+    </div>
+</div>
+<div>
+    <h3>Отзывы:</h3>
+    <ul>
+        <div th:each="review : ${reviews}">
+            <label>
+                <h3>
+                    <li><span th:text="${review.mark}"> </span> из 10</li>
+                </h3>
+                Комментарий: <span th:text="${review.comment}"></span><br>
+                Когда оставлен: <span th:text="${review.dateTime}"></span><br>
+                Кем оставлен: <span th:text="${review.reviewUser.login}"></span><br>
+            </label>
+        </div>
+    </ul>
+</div>
 
 
-    <!--<c:if test="${not empty sessionScope.currentUser and sessionScope.currentUser.login != 'borzdykooa@mail.ru'}">-->
-        <!--Количество упаковок для заказа: <br>-->
-        <!--<input type="number" name="orderQuantity" value="1" min="1" required max="${requestScope.medicine.quantity}"/> <br>-->
-        <!--<input type="submit" value="Добавить в корзину">-->
-    <!--</c:if>-->
+<!--/*@thymesVar id="review" type="com.borzdykooa.entity.Review"*/-->
+<form th:action="@{/saveReview}" method="post" th:object="${review}">
+    <input type="hidden" name="medicine" th:value="${medicine.id}"/><br>
+    <p>Оставить свой отзыв:<br></p>
+    Ваша оценка: <br>
+    <input type="number" name="mark" min="1" max="10"/><br>
+    Ваш отзыв: <br>
+    <input type="text" name="comment"/>
+    <br><br>
+    <input type="submit" value="Сохранить отзыв">
+</form>
+<br><br>
 
-<!--</form>-->
-
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::basket}"></div>
+<div th:insert="~{header::logout}"></div>
 </body>
 </html>

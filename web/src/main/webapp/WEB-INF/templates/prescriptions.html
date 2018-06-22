@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+    <h3>Список рецептов:</h3>
+    <ol>
+        <form th:action="@{/prescriptions}" method="get">
+            <div th:each="prescription : ${prescriptions}">
+                <label>
+                    <h3>
+                        <li><span th:text="${prescription.name}"></span></li>
+                    </h3>
+                    Клиент: <span th:text="${prescription.prescriptionUser.login}"></span><br>
+                    Лекарство: <span th:text="${prescription.prescriptionMedicine.name}"></span><br>
+                    Количество упаковок: <span th:text="${prescription.quantity}"></span><br>
+                    Срок действия: <span th:text="${prescription.validity}"></span><br>
+                </label>
+            </div>
+        </form>
+    </ol>
+</div>
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+
+</body>
+</html>

@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PaginationDto {
 
-    Integer limit;
-    Integer page;
-    String partName;
-    String partDescription;
-    Boolean needPrescription;
+    private Integer limit;
+    private Integer page;
+//    private Integer offset;
+    private String partName;
+    private String partDescription;
+    private Boolean needPrescription;
 }

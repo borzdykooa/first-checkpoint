@@ -28,11 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin")
                 .hasAnyAuthority("ADMIN")
+                .antMatchers("/home")
+                .hasAnyAuthority("CLIENT")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/firstPage")
                 .and()
                 .logout();
         http.userDetailsService(userDetailsService);

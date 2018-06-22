@@ -1,7 +1,6 @@
 package com.borzdykooa.dao.repository;
 
 import com.borzdykooa.dto.PaginationDto;
-import com.borzdykooa.dto.SaveMedicineDto;
 import com.borzdykooa.entity.Medicine;
 
 import java.util.List;
@@ -14,5 +13,5 @@ public interface MedicineDao extends Dao<Long, Medicine> {
 
     List<Medicine> findComplex(PaginationDto paginationDto);
 
-    Long saveMedicine(SaveMedicineDto saveMedicineDto);
+    List<Medicine> findAllNeedPrescription();
 }

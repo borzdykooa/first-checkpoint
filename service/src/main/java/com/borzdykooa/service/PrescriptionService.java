@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,6 +28,10 @@ public class PrescriptionService {
         return prescriptionDao.findAll();
     }
 
+    public List<Prescription> findAllByLoginAndMedicineId(String login, Long medicineId, LocalDate date, Long quantity) {
+        return prescriptionDao.findAllByLoginAndMedicineId(login, medicineId, date, quantity);
+    }
+
     public Long save(Prescription prescription) {
         return prescriptionDao.save(prescription);
     }
@@ -37,5 +42,9 @@ public class PrescriptionService {
 
     public void update(Prescription prescription) {
         prescriptionDao.update(prescription);
+    }
+
+    public List<Prescription> findAllByLogin(String login) {
+        return prescriptionDao.findAllByLogin(login);
     }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/saveOrder}" method="post">
+
+    <!--<input type="hidden" name="user" value="${sessionScope.currentUser.id}"/><br>-->
+
+    <div>
+        <h3>Список заказываемых лекарств:</h3>
+        <ol>
+            <div th:each="basketDto : ${addToBasket}">
+                <label>
+                    <li><span th:text="${basketDto.medicineName}"></span>
+                        <p>Цена: <span th:text="${basketDto.medicinePrice}"></span> бел.руб.</p>
+                        <p>Количество упаковок: <span th:text="${basketDto.orderQuantity}"></span></p>
+                        <p>Стоимость: <span th:text="${basketDto.sum}"></span> бел.руб.</p>
+                    </li>
+                </label>
+            </div>
+        </ol>
+    </div>
+    <h4>Общая стоимость товаров в корзине: <span th:text="${totalSum}"></span> бел.руб.</h4><br>
+
+    <input type="submit" value="Сохранить"><br>
+    <br>
+
+</form>
+</body>
+</html>

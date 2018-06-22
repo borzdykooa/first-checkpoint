@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="medicine" type="com.borzdykooa.entity.Medicine"*/-->
+<form th:action="@{/deletePrescription}" method="post">
+    <div>
+        <label for="prescription">Рецепт</label>
+        <select id="prescription" name="prescription">
+            <option th:each="prescription : ${prescriptions}"
+                    th:value="${prescription.id}"
+                    th:text="${prescription.name}">
+            </option>
+        </select>
+    </div>
+    <input type="submit" value="Удалить">
+    <br><br>
+</form>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+</body>
+</html>

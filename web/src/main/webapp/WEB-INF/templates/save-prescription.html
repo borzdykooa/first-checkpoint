@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="prescription" type="com.borzdykooa.entity.Prescription"*/-->
+<form th:action="@{/savePrescription}" method="post" th:object="${prescription}">
+
+    <label for="name">Введите уникальный номер нового рецепта:</label>
+    <input type="number" name="name" id="name" th:field="*{name}">
+    <br>
+
+    <div>
+        <label for="client">Клиент</label>
+        <select id="client" name="client">
+            <option th:each="client : ${clients}"
+                    th:value="${client.id}"
+                    th:text="${client.login}">
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <label for="medicine">Лекарство</label>
+        <select id="medicine" name="medicine">
+            <option th:each="medicine : ${medicines}"
+                    th:value="${medicine.id}"
+                    th:text="${medicine.name}">
+            </option>
+        </select>
+    </div>
+
+    <label for="quantity">Количество упаковок:
+        <input type="number" name="quantity" id="quantity" step="1" min="0" value="1">
+    </label><br>
+
+    <label for="validity">Срок действия: </label>
+    <input type="date" name="validity" id="validity">
+
+    <input type="submit" value="Сохранить">
+</form>
+<br><br>
+<div th:insert="~{header::start}"></div>
+<div th:insert="~{header::logout}"></div>
+</body>
+</html>
